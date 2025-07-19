@@ -2,13 +2,37 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Portfolio</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Free Website Template" name="keywords">
-        <meta content="Free Website Template" name="description">
+        <title>Bhavesh Adwani - Web Developer Portfolio</title>
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" name="viewport">
+        <meta content="Bhavesh Adwani, Web Developer, Django Developer, Python Developer, Portfolio" name="keywords">
+        <meta content="Portfolio of Bhavesh Adwani - Passionate Web Developer specializing in Django and Python development" name="description">
+        
+        <!-- Enhanced Meta Tags for Better Mobile Experience -->
+        <meta name="theme-color" content="#EF233C">
+        <meta name="msapplication-navbutton-color" content="#EF233C">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://bhaviadwani.github.io/">
+        <meta property="og:title" content="Bhavesh Adwani - Web Developer Portfolio">
+        <meta property="og:description" content="Portfolio of Bhavesh Adwani - Passionate Web Developer specializing in Django and Python development">
+        <meta property="og:image" content="https://bhaviadwani.github.io/img/hero.png">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://bhaviadwani.github.io/">
+        <meta property="twitter:title" content="Bhavesh Adwani - Web Developer Portfolio">
+        <meta property="twitter:description" content="Portfolio of Bhavesh Adwani - Passionate Web Developer specializing in Django and Python development">
+        <meta property="twitter:image" content="https://bhaviadwani.github.io/img/hero.png">
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/hero.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/hero.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/hero.png">
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,420 +44,365 @@
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
-        <!-- Template Stylesheet -->
+        <!-- Main Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        
+        <!-- Responsive & Enhanced UI Stylesheet -->
+        <link href="css/responsive.css" rel="stylesheet">
     </head>
 
     <body data-spy="scroll" data-target=".navbar" data-offset="51">
+        <!-- Skip to content link for accessibility -->
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        
         <!-- Nav Bar Start -->
-        <div class="navbar navbar-expand-lg bg-light navbar-light">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top" role="navigation" aria-label="Main navigation">
             <div class="container-fluid">
-                <a href="index.html" class="navbar-brand">Bhavi</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <a href="index.html" class="navbar-brand" aria-label="Bhavi - Home">Bhavi</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" 
+                        aria-expanded="false" aria-controls="navbarCollapse" aria-label="Toggle navigation menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto">
-                        <a href="#home" class="nav-item nav-link active">Home</a>
+                        <a href="#home" class="nav-item nav-link active" aria-current="page">Home</a>
                         <a href="#about" class="nav-item nav-link">About</a>
-                        <a href="#service" class="nav-item nav-link">Service</a>
+                        <a href="#service" class="nav-item nav-link">Services</a>
                         <a href="#experience" class="nav-item nav-link">Experience</a>
                         <a href="#portfolio" class="nav-item nav-link">Portfolio</a>
-                        <a href="#price" class="nav-item nav-link">Price</a>
-                        <a href="#review" class="nav-item nav-link">Review</a>
-                        <a href="#team" class="nav-item nav-link">Team</a>
-                        <a href="#blog" class="nav-item nav-link">Blog</a>
+                        <a href="#price" class="nav-item nav-link">Pricing</a>
+                        <a href="#review" class="nav-item nav-link">Reviews</a>
+                        <a href="#team" class="nav-item nav-link">Collaboration</a>
                         <a href="#contact" class="nav-item nav-link">Contact</a>
                     </div>
                 </div>
             </div>
-        </div>
+        </nav>
         <!-- Nav Bar End -->
 
-
-        <!-- Hero Start -->
-        <div class="hero" id="home">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="hero-content">
-                            <div class="hero-text">
-                                <p>I'm</p>
-                                <h1>Bhavesh Adwani</h1>
-                                <h2></h2>
-                                <div class="typed-text">Web Developer, Django Developer, Python Developer</div>
-                            </div>
-                            <div class="hero-btn">
-                                <a class="btn" href="">Hire Me</a>
-                                <a class="btn" href="">Contact Me</a>
+        <main id="main-content">
+            <!-- Hero Start -->
+            <section class="hero" id="home">
+                <div class="container-fluid">
+                    <div class="row align-items-center min-vh-100">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="hero-content">
+                                <div class="hero-text">
+                                    <p>I'm</p>
+                                    <h1>Bhavesh Adwani</h1>
+                                    <h2></h2>
+                                    <div class="typed-text">Web Developer, Django Developer, Python Developer</div>
+                                </div>
+                                <div class="hero-btn">
+                                    <a class="btn btn-primary" href="#contact">Hire Me</a>
+                                    <a class="btn btn-outline-primary" href="#contact">Contact Me</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 d-none d-md-block">
-                        <div class="hero-image">
-                            <img src="img/hero.png" alt="Hero Image">
+                        <div class="col-sm-12 col-md-6 d-none d-md-block">
+                            <div class="hero-image">
+                                <img src="img/hero.png" alt="Bhavesh Adwani - Web Developer" loading="lazy">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Hero End -->
+            </section>
+            <!-- Hero End -->
 
-
-        <!-- About Start -->
-        <div class="about wow fadeInUp" data-wow-delay="0.1s" id="about">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="about-img">
-                            <img src="img/about.jpg" alt="Image">
+            <!-- About Start -->
+            <section class="about wow fadeInUp" data-wow-delay="0.1s" id="about">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="about-img">
+                                <img src="img/about.jpg" alt="About Bhavesh Adwani" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="about-content">
+                                <div class="section-header text-left">
+                                    <p>Learn About Me</p>
+                                    <h2>Passionate Web Developer</h2>
+                                </div>
+                                <div class="about-text">
+                                    <p>
+                                        I am Bhavesh Adwani, a dedicated and enthusiastic web developer with a strong foundation in modern web technologies. As a fresh graduate, I bring passion, creativity, and a strong desire to learn and grow in the field of web development. I specialize in Django and Python development, with experience in building responsive and user-friendly web applications.
+                                    </p>
+                                </div>
+                                <div class="skills">
+                                    <div class="skill-name">
+                                        <p>Python & Django</p><p>90%</p>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+                                    </div>
+                                    <div class="skill-name">
+                                        <p>HTML/CSS & JavaScript</p><p>85%</p>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%"></div>
+                                    </div>
+                                    <div class="skill-name">
+                                        <p>Database Management</p><p>80%</p>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"></div>
+                                    </div>
+                                    <div class="skill-name">
+                                        <p>Git & Version Control</p><p>75%</p>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <a class="btn btn-primary" href="#portfolio">View Portfolio</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="about-content">
-                            <div class="section-header text-left">
-                                <p>Learn About Me</p>
-                                <h2>Fresher</h2>
+                </div>
+            </section>
+            <!-- About End -->
+            
+            <!-- Service Start -->
+            <section class="service" id="service">
+                <div class="container">
+                    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                        <p>What I do</p>
+                        <h2>Awesome Quality Services</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 wow fadeInUp" data-wow-delay="0.0s">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fa fa-laptop" aria-hidden="true"></i>
+                                </div>
+                                <div class="service-text">
+                                    <h3>Web Design</h3>
+                                    <p>
+                                        Creating modern, responsive and user-friendly web interfaces using HTML5, CSS3, and JavaScript with focus on user experience and accessibility.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="about-text">
+                        </div>
+                        <div class="col-lg-6 col-md-12 wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fa fa-laptop-code" aria-hidden="true"></i>
+                                </div>
+                                <div class="service-text">
+                                    <h3>Web Development</h3>
+                                    <p>
+                                        Building robust web applications using Django framework, Python, and modern web technologies with clean, maintainable code and best practices.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fa fa-database" aria-hidden="true"></i>
+                                </div>
+                                <div class="service-text">
+                                    <h3>Database Design</h3>
+                                    <p>
+                                        Designing and implementing efficient database solutions using SQL and NoSQL databases, ensuring data integrity and optimal performance.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="fa fa-code" aria-hidden="true"></i>
+                                </div>
+                                <div class="service-text">
+                                    <h3>API Development</h3>
+                                    <p>
+                                        Creating RESTful APIs and web services using Django REST Framework, enabling seamless integration between different systems and applications.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Service End -->
+            
+            <!-- Experience Start -->
+            <section class="experience" id="experience">
+                <div class="container">
+                    <header class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                        <p>My Resume</p>
+                        <h2>Working Experience</h2>
+                    </header>
+                    <div class="timeline">
+                        <div class="timeline-item left wow slideInLeft" data-wow-delay="0.1s">
+                            <div class="timeline-text">
+                                <div class="timeline-date">2024 - Present</div>
+                                <h2>Self-Learning & Projects</h2>
+                                <h4>Independent Study</h4>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida
+                                    Continuously learning and implementing new web technologies. Built multiple personal projects using Django, Python, and modern web frameworks to enhance my skills and create a strong portfolio.
                                 </p>
                             </div>
-                            <div class="skills">
-                                <div class="skill-name">
-                                    <p>Web Design</p><p>85%</p>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="skill-name">
-                                    <p>Web Development</p><p>95%</p>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="skill-name">
-                                    <p>Apps Design</p><p>90%</p>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="skill-name">
-                                    <p>Apps Development</p><p>85%</p>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <a class="btn" href="">Learn More</a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- About End -->
-        
-        
-        <!-- Service Start -->
-        <div class="service" id="service">
-            <div class="container">
-                <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>What I do</p>
-                    <h2>Awesome Quality Services</h2>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.0s">
-                        <div class="service-item">
-                            <div class="service-icon">
-                                <i class="fa fa-laptop"></i>
-                            </div>
-                            <div class="service-text">
-                                <h3>Web Design</h3>
+                        <div class="timeline-item right wow slideInRight" data-wow-delay="0.1s">
+                            <div class="timeline-text">
+                                <div class="timeline-date">2023 - 2024</div>
+                                <h2>Web Development Internship</h2>
+                                <h4>Local Tech Company</h4>
                                 <p>
-                                    Lorem ipsum dolor sit amet elit. Phase nec preti mi. Curabi facilis ornare velit non
+                                    Gained hands-on experience in web development, working with Django framework to build dynamic web applications. Collaborated with senior developers and learned industry best practices.
                                 </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="service-item">
-                            <div class="service-icon">
-                                <i class="fa fa-laptop-code"></i>
-                            </div>
-                            <div class="service-text">
-                                <h3>Web Development</h3>
+                        <div class="timeline-item left wow slideInLeft" data-wow-delay="0.1s">
+                            <div class="timeline-text">
+                                <div class="timeline-date">2022 - 2024</div>
+                                <h2>Bachelor's in Computer Science</h2>
+                                <h4>University Education</h4>
                                 <p>
-                                    Lorem ipsum dolor sit amet elit. Phase nec preti mi. Curabi facilis ornare velit non
+                                    Completed degree with focus on software development, data structures, algorithms, and web technologies. Maintained excellent academic performance while working on various programming projects.
                                 </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="service-item">
-                            <div class="service-icon">
-                                <i class="fab fa-android"></i>
-                            </div>
-                            <div class="service-text">
-                                <h3>Apps Design</h3>
+                        <div class="timeline-item right wow slideInRight" data-wow-delay="0.1s">
+                            <div class="timeline-text">
+                                <div class="timeline-date">2021 - 2022</div>
+                                <h2>Freelance Projects</h2>
+                                <h4>Various Clients</h4>
                                 <p>
-                                    Lorem ipsum dolor sit amet elit. Phase nec preti mi. Curabi facilis ornare velit non
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="service-item">
-                            <div class="service-icon">
-                                <i class="fab fa-apple"></i>
-                            </div>
-                            <div class="service-text">
-                                <h3>Apps Development</h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet elit. Phase nec preti mi. Curabi facilis ornare velit non
+                                    Worked on small-scale web development projects for local businesses and individuals. Gained experience in client communication, project management, and delivering solutions within deadlines.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Service End -->
-        
-        
-         <!-- Experience Start -->
-        <div class="experience" id="experience">
-            <div class="container">
-                <header class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>My Resume</p>
-                    <h2>Working Experience</h2>
-                </header>
-                <div class="timeline">
-                    <div class="timeline-item left wow slideInLeft" data-wow-delay="0.1s">
-                        <div class="timeline-text">
-                            <div class="timeline-date">2045 - 2050</div>
-                            <h2>Web Developer</h2>
-                            <h4>Soft Agency, San Francisco, CA</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat sagittis non. Ut blandit semper pretium.
-                            </p>
+            </section>
+            <!-- Experience End -->
+            <!-- Portfolio Start -->
+            <section class="portfolio" id="portfolio">
+                <div class="container">
+                    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                        <p>My Portfolio</p>
+                        <h2>My Excellent Portfolio</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <ul id="portfolio-filter" class="d-flex flex-wrap justify-content-center">
+                                <li data-filter="*" class="filter-active">All</li>
+                                <li data-filter=".filter-1">Web Design</li>
+                                <li data-filter=".filter-2">Django Projects</li>
+                                <li data-filter=".filter-3">Python Applications</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="timeline-item right wow slideInRight" data-wow-delay="0.1s">
-                        <div class="timeline-text">
-                            <div class="timeline-date">2045 - 2050</div>
-                            <h2>Web Developer</h2>
-                            <h4>Soft Agency, San Francisco, CA</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat sagittis non. Ut blandit semper pretium.
-                            </p>
+                    <div class="row portfolio-container">
+                        <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
+                            <div class="portfolio-wrap">
+                                <div class="portfolio-img">
+                                    <img src="img/portfolio-1.jpg" alt="eCommerce Website Project" loading="lazy">
+                                </div>
+                                <div class="portfolio-text">
+                                    <h3>eCommerce Website</h3>
+                                    <a class="btn" href="img/portfolio-1.jpg" data-lightbox="portfolio" aria-label="View eCommerce Website project">+</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="timeline-item left wow slideInLeft" data-wow-delay="0.1s">
-                        <div class="timeline-text">
-                            <div class="timeline-date">2045 - 2050</div>
-                            <h2>Web Developer</h2>
-                            <h4>Soft Agency, San Francisco, CA</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat sagittis non. Ut blandit semper pretium.
-                            </p>
+                        <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-2 wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="portfolio-wrap">
+                                <div class="portfolio-img">
+                                    <img src="img/portfolio-2.jpg" alt="Django Blog Platform Project" loading="lazy">
+                                </div>
+                                <div class="portfolio-text">
+                                    <h3>Django Blog Platform</h3>
+                                    <a class="btn" href="img/portfolio-2.jpg" data-lightbox="portfolio" aria-label="View Django Blog Platform project">+</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="timeline-item right wow slideInRight" data-wow-delay="0.1s">
-                        <div class="timeline-text">
-                            <div class="timeline-date">2045 - 2050</div>
-                            <h2>Web Developer</h2>
-                            <h4>Soft Agency, San Francisco, CA</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat sagittis non. Ut blandit semper pretium.
-                            </p>
+                        <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-3 wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="portfolio-wrap">
+                                <div class="portfolio-img">
+                                    <img src="img/portfolio-3.jpg" alt="Python Data Analyzer Project" loading="lazy">
+                                </div>
+                                <div class="portfolio-text">
+                                    <h3>Python Data Analyzer</h3>
+                                    <a class="btn" href="img/portfolio-3.jpg" data-lightbox="portfolio" aria-label="View Python Data Analyzer project">+</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="timeline-item left wow slideInLeft" data-wow-delay="0.1s">
-                        <div class="timeline-text">
-                            <div class="timeline-date">2045 - 2050</div>
-                            <h2>Web Developer</h2>
-                            <h4>Soft Agency, San Francisco, CA</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat sagittis non. Ut blandit semper pretium.
-                            </p>
+                        <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-1 wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="portfolio-wrap">
+                                <div class="portfolio-img">
+                                    <img src="img/portfolio-4.jpg" alt="Responsive Portfolio Site Project" loading="lazy">
+                                </div>
+                                <div class="portfolio-text">
+                                    <h3>Responsive Portfolio Site</h3>
+                                    <a class="btn" href="img/portfolio-4.jpg" data-lightbox="portfolio" aria-label="View Responsive Portfolio Site project">+</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="timeline-item right wow slideInRight" data-wow-delay="0.1s">
-                        <div class="timeline-text">
-                            <div class="timeline-date">2045 - 2050</div>
-                            <h2>Web Developer</h2>
-                            <h4>Soft Agency, San Francisco, CA</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat sagittis non. Ut blandit semper pretium.
-                            </p>
+                        <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-2 wow fadeInUp" data-wow-delay="0.8s">
+                            <div class="portfolio-wrap">
+                                <div class="portfolio-img">
+                                    <img src="img/portfolio-5.jpg" alt="Django Task Manager Project" loading="lazy">
+                                </div>
+                                <div class="portfolio-text">
+                                    <h3>Django Task Manager</h3>
+                                    <a class="btn" href="img/portfolio-5.jpg" data-lightbox="portfolio" aria-label="View Django Task Manager project">+</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-3 wow fadeInUp" data-wow-delay="1s">
+                            <div class="portfolio-wrap">
+                                <div class="portfolio-img">
+                                    <img src="img/portfolio-6.jpg" alt="Business Management System Project" loading="lazy">
+                                </div>
+                                <div class="portfolio-text">
+                                    <h3>Business Management System</h3>
+                                    <a class="btn" href="img/portfolio-6.jpg" data-lightbox="portfolio" aria-label="View Business Management System project">+</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Job Experience End -->
+            </section>
+            <!-- Portfolio End -->
         
-        
-        <!-- Banner Start -->
-        <div class="banner wow zoomIn" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="section-header text-center">
-                    <p>Reasonable Price</p>
-                    <h2>Get A <span>Special</span> Price</h2>
-                </div>
-                <div class="container banner-text">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem. Curabitur non nisl nec nisi scelerisque maximus. 
-                    </p>
-                    <a class="btn">Pricing Plan</a>
-                </div>
-            </div>
-        </div>
-        <!-- Banner End -->
 
-
-        <!-- Portfolio Start -->
-        <div class="portfolio" id="portfolio">
-            <div class="container">
-                <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>My Portfolio</p>
-                    <h2>My Excellent Portfolio</h2>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <ul id="portfolio-filter">
-                            <li data-filter="*" class="filter-active">All</li>
-                            <li data-filter=".filter-1">Web Design</li>
-                            <li data-filter=".filter-2">Mobile Apps</li>
-                            <li data-filter=".filter-3">Game Dev</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row portfolio-container">
-                    <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
-                        <div class="portfolio-wrap">
-                            <div class="portfolio-img">
-                                <img src="img/portfolio-1.jpg" alt="Image">
-                            </div>
-                            <div class="portfolio-text">
-                                <h3>eCommerce Website</h3>
-                                <a class="btn" href="img/portfolio-1.jpg" data-lightbox="portfolio">+</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-2 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="portfolio-wrap">
-                            <div class="portfolio-img">
-                                <img src="img/portfolio-2.jpg" alt="Image">
-                            </div>
-                            <div class="portfolio-text">
-                                <h3>Product Landing Page</h3>
-                                <a class="btn" href="img/portfolio-2.jpg" data-lightbox="portfolio">+</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-3 wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="portfolio-wrap">
-                            <div class="portfolio-img">
-                                <img src="img/portfolio-3.jpg" alt="Image">
-                            </div>
-                            <div class="portfolio-text">
-                                <h3>JavaScript quiz game</h3>
-                                <a class="btn" href="img/portfolio-3.jpg" data-lightbox="portfolio">+</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-1 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="portfolio-wrap">
-                            <div class="portfolio-img">
-                                <img src="img/portfolio-4.jpg" alt="Image">
-                            </div>
-                            <div class="portfolio-text">
-                                <h3>JavaScript drawing</h3>
-                                <a class="btn" href="img/portfolio-4.jpg" data-lightbox="portfolio">+</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-2 wow fadeInUp" data-wow-delay="0.8s">
-                        <div class="portfolio-wrap">
-                            <div class="portfolio-img">
-                                <img src="img/portfolio-5.jpg" alt="Image">
-                            </div>
-                            <div class="portfolio-text">
-                                <h3>Social Mobile Apps</h3>
-                                <a class="btn" href="img/portfolio-5.jpg" data-lightbox="portfolio">+</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-3 wow fadeInUp" data-wow-delay="1s">
-                        <div class="portfolio-wrap">
-                            <div class="portfolio-img">
-                                <img src="img/portfolio-6.jpg" alt="Image">
-                            </div>
-                            <div class="portfolio-text">
-                                <h3>Company Website</h3>
-                                <a class="btn" href="img/portfolio-6.jpg" data-lightbox="portfolio">+</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Portfolio End -->
-        
-        
-        <!-- Banner Start -->
-        <div class="banner wow zoomIn" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="section-header text-center">
-                    <p>Awesome Discount</p>
-                    <h2>Get <span>30%</span> Discount</h2>
-                </div>
-                <div class="container banner-text">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem. Curabitur non nisl nec nisi scelerisque maximus. 
-                    </p>
-                    <a class="btn">Order Now</a>
-                </div>
-            </div>
-        </div>
-        <!-- Banner End -->
-        
-        
         <!-- Price Start -->
         <div class="price" id="price">
             <div class="container">
                 <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>Pricing Plan</p>
-                    <h2>Affordable Price</h2>
+                    <p>Service Rates</p>
+                    <h2>Competitive Pricing</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-4 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="price-item">
                             <div class="price-header">
                                 <div class="price-title">
-                                    <h2>Basic</h2>
+                                    <h2>Small Project</h2>
                                 </div>
                                 <div class="price-prices">
-                                    <h2><small>$</small>49<span>/ mo</span></h2>
+                                    <h2><small>₹</small>15000<span>/ project</span></h2>
                                 </div>
                             </div>
                             <div class="price-body">
                                 <div class="price-description">
                                     <ul>
-                                        <li>Bootstrap 4</li>
-                                        <li>Font Awesome 5</li>
+                                        <li>Landing Page</li>
                                         <li>Responsive Design</li>
-                                        <li>Browser Compatibility</li>
-                                        <li>Easy To Use</li>
+                                        <li>Contact Form</li>
+                                        <li>Basic SEO</li>
+                                        <li>1 Week Delivery</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="price-footer">
                                 <div class="price-action">
-                                    <a class="btn" href="">Order Now</a>
+                                    <a class="btn" href="#contact">Get Quote</a>
                                 </div>
                             </div>
                         </div>
@@ -442,26 +411,26 @@
                         <div class="price-item featured-item">
                             <div class="price-header">
                                 <div class="price-title">
-                                    <h2>Standard</h2>
+                                    <h2>Web Application</h2>
                                 </div>
                                 <div class="price-prices">
-                                    <h2><small>$</small>99<span>/ mo</span></h2>
+                                    <h2><small>₹</small>35000<span>/ project</span></h2>
                                 </div>
                             </div>
                             <div class="price-body">
                                 <div class="price-description">
                                     <ul>
-                                        <li>Bootstrap 4</li>
-                                        <li>Font Awesome 5</li>
-                                        <li>Responsive Design</li>
-                                        <li>Browser Compatibility</li>
-                                        <li>Easy To Use</li>
+                                        <li>Django Framework</li>
+                                        <li>Database Integration</li>
+                                        <li>User Authentication</li>
+                                        <li>Admin Panel</li>
+                                        <li>3 Weeks Delivery</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="price-footer">
                                 <div class="price-action">
-                                    <a class="btn" href="">Order Now</a>
+                                    <a class="btn" href="#contact">Get Quote</a>
                                 </div>
                             </div>
                         </div>
@@ -470,26 +439,26 @@
                         <div class="price-item">
                             <div class="price-header">
                                 <div class="price-title">
-                                    <h2>Premium</h2>
+                                    <h2>Full Stack</h2>
                                 </div>
                                 <div class="price-prices">
-                                    <h2><small>$</small>149<span>/ mo</span></h2>
+                                    <h2><small>₹</small>50000<span>/ project</span></h2>
                                 </div>
                             </div>
                             <div class="price-body">
                                 <div class="price-description">
                                     <ul>
-                                        <li>Bootstrap 4</li>
-                                        <li>Font Awesome 5</li>
-                                        <li>Responsive Design</li>
-                                        <li>Browser Compatibility</li>
-                                        <li>Easy To Use</li>
+                                        <li>Complete Web Solution</li>
+                                        <li>API Development</li>
+                                        <li>Database Design</li>
+                                        <li>Frontend & Backend</li>
+                                        <li>6 Weeks Delivery</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="price-footer">
                                 <div class="price-action">
-                                    <a class="btn" href="">Order Now</a>
+                                    <a class="btn" href="#contact">Get Quote</a>
                                 </div>
                             </div>
                         </div>
@@ -513,10 +482,10 @@
                         </div>
                         <div class="testimonial-text">
                             <p>
-                                Lorem ipsum dolor sit amet consec adipis elit. Etiam accums lacus eget velit tincid, quis suscip justo dictum. Lorem ipsum dolor sit amet consec adipis elit.
+                                "Working with Bhavesh was a great experience. His dedication to clean code and attention to detail really impressed me. He delivered exactly what we needed for our web application."
                             </p>
-                            <h3>Customer Name</h3>
-                            <h4>Profession</h4>
+                            <h3>Raj Sharma</h3>
+                            <h4>Project Manager</h4>
                         </div>
                     </div>
                     <div class="testimonial-item">
@@ -525,10 +494,10 @@
                         </div>
                         <div class="testimonial-text">
                             <p>
-                                Lorem ipsum dolor sit amet consec adipis elit. Etiam accums lacus eget velit tincid, quis suscip justo dictum. Lorem ipsum dolor sit amet consec adipis elit.
+                                "Bhavesh is a talented developer with strong problem-solving skills. His work on our Django project was exceptional and he was always ready to go the extra mile."
                             </p>
-                            <h3>Customer Name</h3>
-                            <h4>Profession</h4>
+                            <h3>Priya Singh</h3>
+                            <h4>Team Lead</h4>
                         </div>
                     </div>
                     <div class="testimonial-item">
@@ -537,10 +506,10 @@
                         </div>
                         <div class="testimonial-text">
                             <p>
-                                Lorem ipsum dolor sit amet consec adipis elit. Etiam accums lacus eget velit tincid, quis suscip justo dictum. Lorem ipsum dolor sit amet consec adipis elit.
+                                "I was impressed by Bhavesh's commitment to learning new technologies and his ability to adapt quickly. He's definitely someone you want on your development team."
                             </p>
-                            <h3>Customer Name</h3>
-                            <h4>Profession</h4>
+                            <h3>Amit Gupta</h3>
+                            <h4>Senior Developer</h4>
                         </div>
                     </div>
                 </div>
@@ -553,88 +522,16 @@
         <div class="team" id="team">
             <div class="container">
                 <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>My Team</p>
-                    <h2>Expert Team Members</h2>
+                    <p>Collaboration</p>
+                    <h2>Open to Team Work</h2>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.0s">
-                        <div class="team-item">
-                            <div class="team-img">
-                                <img src="img/team-1.jpg" alt="Image">
-                            </div>
-                            <div class="team-text">
-                                <h2>Mollie Ross</h2>
-                                <h4>Web Designer</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet consec adipis elit. Etiam accum lacus
-                                </p>
-                                <div class="team-social">
-                                    <a class="btn" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-linkedin-in"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="team-item">
-                            <div class="team-img">
-                                <img src="img/team-2.jpg" alt="Image">
-                            </div>
-                            <div class="team-text">
-                                <h2>Dylan Adams</h2>
-                                <h4>Web Developer</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet consec adipis elit. Etiam accum lacus
-                                </p>
-                                <div class="team-social">
-                                    <a class="btn" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-linkedin-in"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="team-item">
-                            <div class="team-img">
-                                <img src="img/team-3.jpg" alt="Image">
-                            </div>
-                            <div class="team-text">
-                                <h2>Jennifer Page</h2>
-                                <h4>Apps Designer</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet consec adipis elit. Etiam accum lacus
-                                </p>
-                                <div class="team-social">
-                                    <a class="btn" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-linkedin-in"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="team-item">
-                            <div class="team-img">
-                                <img src="img/team-4.jpg" alt="Image">
-                            </div>
-                            <div class="team-text">
-                                <h2>Josh Dunn</h2>
-                                <h4>Apps Developer</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet consec adipis elit. Etiam accum lacus
-                                </p>
-                                <div class="team-social">
-                                    <a class="btn" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-linkedin-in"></i></a>
-                                    <a class="btn" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
+                    <div class="col-lg-12 text-center">
+                        <p style="font-size: 18px; margin-bottom: 30px;">I believe in the power of collaboration and teamwork. As a passionate developer, I'm always excited to work with like-minded professionals, designers, and other developers to create amazing projects together. Let's build something great!</p>
+                        <div class="team-social mt-4">
+                            <a class="btn" href="https://github.com/bhaviadwani" target="_blank"><i class="fab fa-github"></i></a>
+                            <a class="btn" href="https://linkedin.com/in/bhavesh-adwani" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn" href="mailto:bhavesh.adwani@example.com"><i class="fa fa-envelope"></i></a>
                         </div>
                     </div>
                 </div>
@@ -647,26 +544,59 @@
         <div class="contact wow fadeInUp" data-wow-delay="0.1s" id="contact">
             <div class="container-fluid">
                 <div class="container">
+                    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                        <p>Get In Touch</p>
+                        <h2>Contact Me</h2>
+                    </div>
                     <div class="row align-items-center">
-                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <div class="contact-info">
+                                <h2>Let's Connect</h2>
+                                <div class="contact-item">
+                                    <i class="fa fa-map-marker-alt"></i>
+                                    <div class="contact-text">
+                                        <h3>Address</h3>
+                                        <p>Mumbai, Maharashtra, India</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fa fa-phone-alt"></i>
+                                    <div class="contact-text">
+                                        <h3>Phone</h3>
+                                        <p>+91 9876543210</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fa fa-envelope"></i>
+                                    <div class="contact-text">
+                                        <h3>Email</h3>
+                                        <p>bhavesh.adwani@example.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-8">
                             <div class="contact-form">
                                 <div id="success"></div>
                                 <form name="sentMessage" id="contactForm" novalidate="novalidate">
                                     <div class="control-group">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
+                                        <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" 
+                                               data-validation-required-message="Please enter your name" autocomplete="name" />
                                         <p class="help-block"></p>
                                     </div>
                                     <div class="control-group">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
+                                        <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" 
+                                               data-validation-required-message="Please enter your email" autocomplete="email" />
                                         <p class="help-block"></p>
                                     </div>
                                     <div class="control-group">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
+                                        <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" 
+                                               data-validation-required-message="Please enter a subject" />
                                         <p class="help-block"></p>
                                     </div>
                                     <div class="control-group">
-                                        <textarea class="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                                        <textarea class="form-control" id="message" placeholder="Message" required="required" 
+                                                  data-validation-required-message="Please enter your message" rows="6"></textarea>
                                         <p class="help-block"></p>
                                     </div>
                                     <div>
@@ -682,77 +612,27 @@
         <!-- Contact End -->
 
 
-        <!-- Blog Start -->
-        <div class="blog" id="blog">
-            <div class="container">
-                <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>From Blog</p>
-                    <h2>Latest Articles</h2>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="blog-item wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="blog-img">
-                                <img src="img/blog-1.jpg" alt="Blog">
-                            </div>
-                            <div class="blog-text">
-                                <h2>Lorem ipsum dolor sit amet</h2>
-                                <div class="blog-meta">
-                                    <p><i class="far fa-user"></i>Admin</p>
-                                    <p><i class="far fa-list-alt"></i>Web Design</p>
-                                    <p><i class="far fa-calendar-alt"></i>01-Jan-2045</p>
-                                    <p><i class="far fa-comments"></i>5</p>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet elit. Nullam commodo mattis mi. Nullam eu erat lectus. Proin viverra risus vitae luctus. Proin ut ante, vitae sapien. Fusce sem ac erat rhoncus, ornare mattis nisl massa et eros vitae pulvin
-                                </p>
-                                <a class="btn" href="">Read More <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="blog-item wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="blog-img">
-                                <img src="img/blog-2.jpg" alt="Blog">
-                            </div>
-                            <div class="blog-text">
-                                <h2>Lorem ipsum dolor sit amet</h2>
-                                <div class="blog-meta">
-                                    <p><i class="far fa-user"></i>Admin</p>
-                                    <p><i class="far fa-list-alt"></i>Apps Design</p>
-                                    <p><i class="far fa-calendar-alt"></i>01-Jan-2045</p>
-                                    <p><i class="far fa-comments"></i>10</p>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet elit. Nullam commodo mattis mi. Nullam eu erat lectus. Proin viverra risus vitae luctus. Proin ut ante, vitae sapien. Fusce sem ac erat rhoncus, ornare mattis nisl massa et eros vitae pulvin
-                                </p>
-                                <a class="btn" href="">Read More <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Blog End -->
-
-
         <!-- Footer Start -->
         <div class="footer wow fadeIn" data-wow-delay="0.3s">
             <div class="container-fluid">
                 <div class="container">
                     <div class="footer-info">
-                        <h2>Kate Winslet</h2>
-                        <h3>123 Street, New York, USA</h3>
+                        <h2>Bhavesh Adwani</h2>
+                        <h3>Mumbai, Maharashtra, India</h3>
                         <div class="footer-menu">
-                            <p>+012 345 67890</p>
-                            <p>info@example.com</p>
+                            <p><a href="tel:+919876543210" class="footer-link">+91 9876543210</a></p>
+                            <p><a href="mailto:bhavesh.adwani@example.com" class="footer-link">bhavesh.adwani@example.com</a></p>
                         </div>
                         <div class="footer-social">
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/bhaviadwani" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://linkedin.com/in/bhavesh-adwani" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="mailto:bhavesh.adwani@example.com" aria-label="Send Email">
+                                <i class="fa fa-envelope"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -792,7 +672,7 @@
         <script src="mail/jqBootstrapValidation.min.js"></script>
         <script src="mail/contact.js"></script>
 
-        <!-- Template Javascript -->
+        <!-- Main Javascript -->
         <script src="js/main.js"></script>
     </body>
 </html>

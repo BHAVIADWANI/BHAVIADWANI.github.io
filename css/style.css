@@ -1,10 +1,27 @@
 /*******************************/
 /********* General CSS *********/
 /*******************************/
+
+/* Dark Theme Variables */
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #808080;
+    --accent-color: #EF233C;
+    --accent-hover: #ff4560;
+    --border-color: #333333;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+}
+
 body {
-    color: #797979;
-    background: #ffffff;
+    color: var(--text-secondary);
+    background: var(--bg-primary);
     font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
 }
 
 h1,
@@ -13,18 +30,18 @@ h3,
 h4,
 h5, 
 h6 {
-    color: #414141;
+    color: var(--text-primary);
 }
 
 a {
-    color: #313131;
+    color: var(--text-secondary);
     transition: .3s;
 }
 
 a:hover,
 a:active,
 a:focus {
-    color: #EF233C;
+    color: var(--accent-color);
     outline: none;
     text-decoration: none;
 }
@@ -43,23 +60,34 @@ a:focus {
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 1px;
-    color: #ffffff;
-    background: #EF233C;
+    color: var(--text-primary);
+    background: var(--accent-color);
     border: 2px solid transparent;
-    border-radius: 0;
-    box-shadow: inset 0 0 0 50px #EF233C;
-    transition: ease-out 0.3s;
-    -webkit-transition: ease-out 0.3s;
-    -moz-transition: ease-out 0.3s;
+    border-radius: 50px;
+    box-shadow: inset 0 0 0 50px var(--accent-color);
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn:hover {
-    color: #EF233C;
+    color: var(--accent-color);
     background: transparent;
-    box-shadow: inset 0 0 0 0 #EF233C;
-    border-color: #EF233C;
+    box-shadow: inset 0 0 0 0 var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
 }
 
+/* Touch feedback for mobile */
+.btn.touch-active,
+.nav-link.touch-active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+/* Enhanced loader */
 #loader {
     position: fixed;
     top: 0;
@@ -69,7 +97,7 @@ a:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
+    background: var(--bg-primary);
     opacity: 0;
     visibility: hidden;
     -webkit-transition: opacity .3s ease-out, visibility 0s linear .3s;
@@ -88,15 +116,16 @@ a:focus {
 
 #loader .loader {
     position: relative;
-    width: 45px;
-    height: 45px;
-    border: 5px solid #dddddd;
-    border-top: 5px solid #EF233C;
+    width: 60px;
+    height: 60px;
+    border: 5px solid var(--border-color);
+    border-top: 5px solid var(--accent-color);
     border-radius: 50%;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 }
 
+/* Enhanced animations */
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
@@ -143,7 +172,7 @@ a:focus {
     position: fixed;
     top: 0;
     width: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, .8);
 }
 
 .navbar .navbar-brand {
@@ -153,7 +182,7 @@ a:focus {
     font-weight: 700;
     letter-spacing: 2px;
     transition: .5s;
-    
+    color: var(--text-primary) !important;
 }
 
 .navbar .navbar-brand img {
@@ -165,7 +194,7 @@ a:focus {
     margin-top: 0;
     border: 0;
     border-radius: 0;
-    background: #f8f9fa;
+    background: var(--bg-secondary);
 }
 
 @media (min-width: 992px) {
@@ -174,51 +203,52 @@ a:focus {
         width: 100%;
         padding: 30px 60px;
         background: transparent !important;
-        border-bottom: 1px dashed rgba(256, 256, 256, .2);
+        border-bottom: 1px dashed rgba(255, 255, 255, .3);
         z-index: 9;
     }
     
     .navbar.nav-sticky {
         padding: 10px 60px;
-        background: #ffffff !important;
+        background: var(--bg-secondary) !important;
+        backdrop-filter: blur(20px);
     }
     
     .navbar .navbar-brand {
-        color: #ffffff;
+        color: var(--text-primary);
     }
     
     .navbar.nav-sticky .navbar-brand {
-        color: #EF233C;
+        color: var(--accent-color);
     }
 
     .navbar-light .navbar-nav .nav-link,
     .navbar-light .navbar-nav .nav-link:focus {
         padding: 10px 10px 8px 10px;
-        color: #ffffff;
+        color: var(--text-primary);
         font-size: 15px;
         font-weight: 500;
     }
     
     .navbar-light.nav-sticky .navbar-nav .nav-link,
     .navbar-light.nav-sticky .navbar-nav .nav-link:focus {
-        color: #414141;
+        color: var(--text-secondary);
     }
 
     .navbar-light .navbar-nav .nav-link:hover,
     .navbar-light .navbar-nav .nav-link.active {
-        color: #111111;
+        color: var(--accent-color);
     }
     
     .navbar-light.nav-sticky .navbar-nav .nav-link:hover,
     .navbar-light.nav-sticky .navbar-nav .nav-link.active {
-        color: #EF233C;
+        color: var(--accent-color);
     }
 }
 
 @media (max-width: 991.98px) {   
     .navbar {
         padding: 15px;
-        background: #ffffff !important;
+        background: var(--bg-secondary) !important;
     }
     
     .navbar .navbar-brand {
@@ -314,15 +344,15 @@ a:focus {
 
 .hero .hero-btn .btn {
     margin-top: 35px;
-    color: #EF233C;
-    background: #ffffff;
-    box-shadow: inset 0 0 0 50px #ffffff;
+    color: var(--primary-color);
+    background: var(--surface-color);
+    box-shadow: inset 0 0 0 50px var(--surface-color);
 }
 
 .hero .hero-btn .btn:hover {
-    color: #ffffff;
+    color: var(--surface-color);
     background: transparent;
-    box-shadow: inset 0 0 0 0 #ffffff;
+    box-shadow: inset 0 0 0 0 var(--surface-color);
     border-color: #ffffff;
 }
 
@@ -429,7 +459,7 @@ a:focus {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
-    background: #ffffff;
+    background: var(--bg-color);
 }
 
 .section-header p::before {
@@ -527,12 +557,12 @@ a:focus {
 .about .progress {
     height: 10px;
     border-radius: 10px;
-    background: #dddddd;
+    background: var(--border-color);
 }
 
 .about .progress .progress-bar {
     width: 0px;
-    background: #EF233C;
+    background: var(--primary-color);
     border-radius: 10px;
     transition: 2s;
 }
@@ -596,8 +626,8 @@ a:focus {
     height: 16px;
     top: 48px;
     right: -8px;
-    background: #ffffff;
-    border: 2px solid #EF233C;
+    background: var(--surface-color);
+    border: 2px solid var(--primary-color);
     border-radius: 16px;
     z-index: 1;
 }
@@ -629,7 +659,7 @@ a:focus {
     top: 44px;
     font-size: 16px;
     font-weight: 600;
-    color: #EF233C;
+    color: var(--primary-color);
     text-transform: uppercase;
     letter-spacing: 1px;
     z-index: 1;
@@ -647,10 +677,10 @@ a:focus {
 
 .experience .timeline .timeline-text {
     padding: 30px;
-    background: #ffffff;
+    background: var(--surface-color);
     position: relative;
-    border-right: 5px solid #dddddd;
-    box-shadow: 0 0 60px rgba(0, 0, 0, .08);
+    border-right: 5px solid var(--border-color);
+    box-shadow: 0 0 60px rgba(0, 0, 0, .3);
 }
 
 .experience .timeline .timeline-item.right .timeline-text {
@@ -753,14 +783,14 @@ a:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #EF233C;
-    background: #ffffff;
+    border: 1px solid var(--primary-color);
+    background: var(--surface-color);
 }
 
 .service .service-icon i {
     position: relative;
     font-size: 60px;
-    color: #EF233C;
+    color: var(--primary-color);
     transition: .3s;
 }
 
@@ -879,8 +909,8 @@ a:focus {
     margin: -30px 15px 30px 15px;
     display: flex;
     align-items: center;
-    background: #ffffff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, .12);
+    background: var(--surface-color);
+    box-shadow: 0 0 15px rgba(0, 0, 0, .3);
 }
 
 .portfolio .portfolio-text h3 {
@@ -956,16 +986,16 @@ a:focus {
 
 .banner .banner-text .btn {
     margin-top: 15px;
-    color: #EF233C;
-    background: #ffffff;
-    box-shadow: inset 0 0 0 50px #ffffff;
+    color: var(--primary-color);
+    background: var(--surface-color);
+    box-shadow: inset 0 0 0 50px var(--surface-color);
 }
 
 .banner .banner-text .btn:hover {
-    color: #ffffff;
+    color: var(--surface-color);
     background: transparent;
-    box-shadow: inset 0 0 0 0 #ffffff;
-    border-color: #ffffff;
+    box-shadow: inset 0 0 0 0 var(--surface-color);
+    border-color: var(--surface-color);
 }
 
 
@@ -989,7 +1019,7 @@ a:focus {
 .price .price-item {
     position: relative;
     margin-bottom: 30px;
-    background: #ffffff;
+    background: var(--surface-color);
 }
 
 .price .featured-item {
@@ -1099,7 +1129,7 @@ a:focus {
 
 .team .team-item {
     position: relative;
-    background: #ffffff;
+    background: var(--surface-color);
     margin-bottom: 30px;
     display: flex;
     align-items: center;
@@ -1180,11 +1210,11 @@ a:focus {
 }
 
 .team .team-item:hover .team-social a.btn {
-    background: #ffffff;
+    background: var(--surface-color);
 }
 
 .team .team-item:hover .team-social a.btn:hover {
-    border-color: #ffffff;
+    border-color: var(--surface-color);
 }
 
 @media(max-width: 575.98px) {
@@ -1258,7 +1288,7 @@ a:focus {
     margin-top: -70px;
     padding: 65px 35px 30px 35px;
     text-align: center;
-    background: #ffffff;
+    background: var(--surface-color);
     border-radius: 500px;
 }
 
@@ -1587,5 +1617,68 @@ a:focus {
         font-size: 16px;
         line-height: 16px;
         padding: 0 5px;
+    }
+    
+    /* Enhanced mobile footer improvements */
+    .footer .footer-social a {
+        margin: 0 8px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .footer .copyright p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}
+
+/* Enhanced footer link styling */
+.footer-link {
+    color: inherit !important;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #EF233C !important;
+    text-decoration: none;
+}
+
+/* Additional responsive improvements */
+@media (max-width: 480px) {
+    .footer .footer-info h2 {
+        font-size: 18px;
+    }
+    
+    .footer .footer-info h3 {
+        font-size: 14px;
+    }
+    
+    .footer .footer-menu p {
+        font-size: 14px;
+        margin: 8px 0;
+    }
+    
+    .footer .footer-social a {
+        margin: 0 6px;
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+}
+
+/* Better accessibility and touch targets */
+@media (hover: none) and (pointer: coarse) {
+    .footer .footer-social a {
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    .footer-link {
+        display: inline-block;
+        padding: 8px 4px;
+        min-height: 44px;
+        line-height: 28px;
     }
 }

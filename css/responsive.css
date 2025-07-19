@@ -1,0 +1,519 @@
+/*******************************/
+/*** Enhanced Responsive CSS ***/
+/*******************************/
+
+/* Modern CSS Reset for better cross-browser compatibility */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Dark Theme Enhanced Variables */
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #808080;
+    --accent-color: #EF233C;
+    --accent-hover: #ff4560;
+    --border-color: #333333;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+    --card-bg: #1e1e1e;
+    --form-bg: #252525;
+}
+
+/* Enhanced Mobile-First Responsive Design */
+/* Improved container responsiveness */
+.container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Dark Theme Section Backgrounds */
+.hero {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.about,
+.service,
+.experience,
+.portfolio,
+.price,
+.review,
+.team,
+.contact {
+    background: var(--bg-secondary);
+}
+
+.about {
+    background: var(--bg-primary);
+}
+
+.experience {
+    background: var(--bg-primary);
+}
+
+.price {
+    background: var(--bg-primary);
+}
+
+.team {
+    background: var(--bg-primary);
+}
+
+/* Dark Theme Card Styling */
+.service-item,
+.price-item,
+.timeline-item,
+.portfolio-item,
+.team-item,
+.blog-item {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-secondary) !important;
+}
+
+.service-item h4,
+.price-item h3,
+.timeline-text h2,
+.team-text h2 {
+    color: var(--text-primary) !important;
+}
+
+/* Enhanced Mobile Navigation */
+.navbar-toggler {
+    border: none !important;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: var(--bg-tertiary) !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 2px rgba(239, 35, 60, 0.25);
+    outline: none;
+}
+
+.navbar-collapse {
+    background: var(--bg-secondary) !important;
+    backdrop-filter: blur(10px);
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Improved Touch Targets */
+.navbar-nav .nav-link {
+    padding: 12px 20px !important;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: var(--text-secondary) !important;
+}
+
+.navbar-nav .nav-link:hover {
+    background: rgba(239, 35, 60, 0.2) !important;
+    border-radius: 6px;
+    transform: translateX(5px);
+    color: var(--accent-color) !important;
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--accent-color) !important;
+}
+
+/* Hero Section Enhancements */
+.hero {
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-content h1 {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.hero-content h2 {
+    font-size: 1.6rem;
+    opacity: 0.9;
+}
+
+.hero-btn .btn {
+    margin: 8px 8px 8px 0;
+    padding: 12px 24px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 160px;
+}
+
+.hero-btn .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 35, 60, 0.3);
+}
+
+/* Better Form Controls */
+.form-control {
+    min-height: 52px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+    padding: 12px 16px;
+    background: var(--form-bg);
+    color: var(--text-primary);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(239, 35, 60, 0.25);
+    transform: scale(1.02);
+    background: var(--form-bg);
+    color: var(--text-primary);
+}
+
+textarea.form-control {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* Enhanced Button Styling */
+.btn {
+    position: relative;
+    overflow: hidden;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Better Image Responsiveness */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Loading Animation Enhancement */
+.loader {
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--accent-color);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Accessibility Improvements */
+.btn:focus,
+.form-control:focus,
+.navbar-toggler:focus {
+    outline: 3px solid rgba(239, 35, 60, 0.5);
+    outline-offset: 2px;
+}
+
+/* Skip to content link for accessibility */
+.skip-link {
+    position: absolute;
+    top: -50px;
+    left: 10px;
+    background: var(--accent-color);
+    color: var(--text-primary);
+    padding: 12px 20px;
+    text-decoration: none;
+    z-index: 9999;
+    border-radius: 0 0 8px 8px;
+    font-weight: 600;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    color: var(--text-primary);
+}
+
+/* Section spacing improvements */
+section {
+    padding: 60px 0;
+}
+
+/* Cards and content boxes */
+.service-item,
+.price-item,
+.timeline-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover,
+.price-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Mobile Breakpoints */
+@media (max-width: 1199.98px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    .hero-content h2 {
+        font-size: 1.4rem;
+    }
+    section {
+        padding: 50px 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-content h2 {
+        font-size: 1.3rem;
+    }
+    .hero-content {
+        text-align: center;
+        padding: 20px;
+    }
+    .hero-btn {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .hero-btn .btn {
+        margin: 8px 4px;
+        width: 100%;
+        max-width: 200px;
+    }
+    .about-content {
+        text-align: center;
+        margin-top: 30px;
+    }
+    .service-item,
+    .price-item {
+        margin-bottom: 30px;
+    }
+    .contact-form {
+        margin-top: 30px;
+    }
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+    .footer-info h2 {
+        font-size: 1.8rem;
+    }
+    section {
+        padding: 40px 0;
+    }
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    .timeline-text h2 {
+        font-size: 1.3rem;
+    }
+    .portfolio-item {
+        margin-bottom: 20px;
+    }
+    .contact-info .contact-item {
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    .hero-content h2 {
+        font-size: 1.2rem;
+    }
+    .hero-btn .btn {
+        font-size: 13px;
+        padding: 10px 20px;
+        min-width: 140px;
+    }
+    .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    section {
+        padding: 30px 0;
+    }
+    .section-header h2 {
+        font-size: 1.6rem;
+    }
+    .form-control {
+        min-height: 48px;
+        font-size: 16px;
+    }
+    .btn {
+        font-size: 13px;
+        padding: 10px 20px;
+    }
+}
+
+/* Dark mode support preparation */
+@media (prefers-color-scheme: dark) {
+    .navbar-collapse {
+        background: var(--bg-secondary) !important;
+        color: var(--text-primary);
+    }
+    
+    /* Enhanced dark mode styles */
+    body {
+        background: var(--bg-primary) !important;
+        color: var(--text-secondary) !important;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn {
+        border: 2px solid;
+    }
+    
+    .form-control {
+        border: 2px solid;
+    }
+}
+
+/* Additional Dark Theme Enhancements */
+.section-header h2 {
+    color: var(--text-primary) !important;
+}
+
+.section-header p {
+    color: var(--text-secondary) !important;
+}
+
+/* Footer Dark Theme */
+.footer {
+    background: var(--bg-primary) !important;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer .footer-info h2,
+.footer .footer-info h3 {
+    color: var(--text-primary) !important;
+}
+
+.footer .footer-menu p {
+    color: var(--text-secondary) !important;
+}
+
+.footer .footer-social a {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.footer .footer-social a:hover {
+    background: var(--accent-color) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.footer .copyright p {
+    color: var(--text-muted) !important;
+}
+
+.footer .copyright a {
+    color: var(--accent-color) !important;
+}
+
+/* Portfolio and Gallery Dark Theme */
+.portfolio-btn a {
+    background: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.portfolio-btn a:hover {
+    background: var(--accent-hover) !important;
+    border-color: var(--accent-hover) !important;
+}
+
+/* Testimonial Dark Theme */
+.testimonial-item {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.testimonial-text p {
+    color: var(--text-secondary) !important;
+}
+
+.testimonial-text h3 {
+    color: var(--text-primary) !important;
+}
+
+/* Contact Info Dark Theme */
+.contact-info .contact-item h4 {
+    color: var(--text-primary) !important;
+}
+
+.contact-info .contact-item p {
+    color: var(--text-secondary) !important;
+}
+
+/* Timeline Dark Theme */
+.timeline .timeline-item .timeline-text {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.timeline .timeline-item .timeline-text p {
+    color: var(--text-secondary) !important;
+}
