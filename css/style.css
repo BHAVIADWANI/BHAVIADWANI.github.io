@@ -16,6 +16,27 @@
     --shadow-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Performance Optimizations */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* GPU Acceleration for animations */
+.hero, .hero-image img, .portfolio-item img, .testimonial-item {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Reduce paint and composite operations */
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
 body {
     color: var(--text-secondary);
     background: var(--bg-primary);
