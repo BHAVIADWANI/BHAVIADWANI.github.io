@@ -1,0 +1,43 @@
+.gradient-background {
+  background: rgb(255, 208, 229);
+  background: linear-gradient(180deg, rgba(255, 208, 229, 1) 0%, rgba(255, 232, 242, 1) 36%, rgba(255, 255, 255, 1) 100%);
+}
+
+.heart-icon {
+  font-size: 48px;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.input-field {
+  border: 2px solid #bd1e59;
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(189, 30, 89, 0.1);
+  border-color: #bd1e59;
+}
+
+.login-button {
+  background: linear-gradient(135deg, #bd1e59 0%, #e91e63 100%);
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(189, 30, 89, 0.3);
+}
+
+.login-button:active {
+  transform: translateY(0);
+}

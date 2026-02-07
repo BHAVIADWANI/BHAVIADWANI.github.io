@@ -5,51 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Valentine's Day</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .gradient-background {
-      background: rgb(255, 208, 229);
-      background: linear-gradient(180deg, rgba(255, 208, 229, 1) 0%, rgba(255, 232, 242, 1) 36%, rgba(255, 255, 255, 1) 100%);
-    }
-
-    .heart-icon {
-      font-size: 48px;
-      animation: heartbeat 1.5s ease-in-out infinite;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.1);
-      }
-    }
-
-    .input-field {
-      border: 2px solid #bd1e59;
-      transition: all 0.3s ease;
-    }
-
-    .input-field:focus {
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(189, 30, 89, 0.1);
-      border-color: #bd1e59;
-    }
-
-    .login-button {
-      background: linear-gradient(135deg, #bd1e59 0%, #e91e63 100%);
-      transition: all 0.3s ease;
-    }
-
-    .login-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(189, 30, 89, 0.3);
-    }
-
-    .login-button:active {
-      transform: translateY(0);
-    }
-  </style>
+  <link rel="stylesheet" href="css/login.css">
 </head>
 <body class="gradient-background">
   <div class="flex items-center justify-center min-h-screen p-4">
@@ -126,76 +82,6 @@
     </div>
   </div>
 
-  <script>
-    const loginForm = document.getElementById('loginForm');
-
-    // Initialize localStorage with default admin user if not exists
-    window.addEventListener('load', function() {
-      let users = JSON.parse(localStorage.getItem('users')) || [];
-      const adminExists = users.some(u => u.username === 'admin');
-      
-      if (!adminExists) {
-        users.push({
-          username: 'admin',
-          password: 'Waheguru13713@',
-          email: 'admin@valentine.com',
-          fullName: 'Admin',
-          joined: new Date().toISOString().split('T')[0],
-          status: 'active',
-          role: 'admin'
-        });
-        localStorage.setItem('users', JSON.stringify(users));
-      }
-    });
-
-    loginForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const remember = document.querySelector('input[name="remember"]').checked;
-      
-      // Perform validation
-      if (email.trim() === '' || password.trim() === '') {
-        alert('Please fill in all fields');
-        return;
-      }
-
-      // Get users from localStorage
-      const users = JSON.parse(localStorage.getItem('users')) || [];
-      const user = users.find(u => (u.username === email || u.email === email) && u.password === password);
-
-      if (user) {
-        // Store current user
-        localStorage.setItem('currentUser', user.username);
-        
-        if (remember) {
-          localStorage.setItem('rememberedUser', user.username);
-        }
-
-        // Check if admin
-        if (user.role === 'admin' || user.username === 'admin') {
-          alert('Welcome Admin! 🔐');
-          window.location.href = 'admin.html';
-        } else {
-          alert('Login successful! Welcome to Valentine\'s Day 💕');
-          window.location.href = 'valentine.html';
-        }
-      } else {
-        alert('Invalid username/email or password');
-      }
-    });
-
-    // Optional: Add smooth focus effects
-    const inputs = document.querySelectorAll('input[type="text"], input[type="password"]');
-    inputs.forEach(input => {
-      input.addEventListener('focus', function() {
-        this.parentElement.parentElement.classList.add('transform', 'scale-105');
-      });
-      input.addEventListener('blur', function() {
-        this.parentElement.parentElement.classList.remove('transform', 'scale-105');
-      });
-    });
-  </script>
+  <script src="js/login.js"></script>
 </body>
 </html>
