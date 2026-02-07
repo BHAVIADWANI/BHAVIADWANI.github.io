@@ -26,7 +26,7 @@
   </div>
 
   <script>
-    // parse query
+    // parse query helper
     function getQuery() {
       const q = {};
       location.search.substring(1).split('&').forEach(pair => {
@@ -37,16 +37,22 @@
       return q;
     }
 
-    (async function(){
-      const q = getQuery();
-      const sender = q.sender || '';
-      const receiver = q.receiver || '';
-      const content = document.getElementById('contentArea');
-      if (!sender || !receiver) {
-        content.innerHTML = '<p class="text-red-600">Invalid invite link.</p>';
-        return;
+    function parseInviteLink(link) {
+      try {
+        const url = new URL(link, location.href);
+        const params = {};
+        url.searchParams.forEach((v,k) => params[k]=v);
+        return params;
+      } catch(e) {
+        // attempt to parse as query string
+        const q = {};
+        link.replace(/^.*\?/, '').split('&').forEach(pair => { if (!pair) return; const [k,v]=pair.split('='); q[decodeURIComponent(k)] = decodeURIComponent(v||''); });
+        return q;
       }
+    }
 
+    async function openInviteFor(sender, receiver, receiverPassword) {
+      const content = document.getElementById('contentArea');
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const creator = users.find(u => u.username === sender && (u.receiverUsername === receiver));
       if (!creator) {
@@ -54,67 +60,84 @@
         return;
       }
 
-      // Create combined image similar to signup/index logic
-      const imgA_src = creator.photoHer || null;
-      const imgB_src = creator.photoHim || null;
+      // If receiverPassword set on creator, require match
+      if (creator.receiverPassword && creator.receiverPassword !== (receiverPassword || '')) {
+        content.innerHTML = '<p class="text-red-600">Incorrect receiver password.</p>';
+        return;
+      }
 
-      if (!imgA_src && !imgB_src) {
+      // Use combined photo if available
+      const combined = creator.photoCombined || creator.photoHer || creator.photoHim || null;
+      if (!combined) {
         content.innerHTML = '<p class="text-gray-600">No photos available.</p>';
         return;
       }
 
-      function loadImg(src) {
-        return new Promise((res, rej) => {
-          const img = new Image();
-          img.crossOrigin = 'anonymous';
-          img.onload = () => res(img);
-          img.onerror = rej;
-          img.src = src;
-        });
-      }
-
       try {
-        let finalDataUrl = null;
-        if (imgA_src && !imgB_src) finalDataUrl = imgA_src;
-        else if (!imgA_src && imgB_src) finalDataUrl = imgB_src;
-        else {
-          const [imgA, imgB] = await Promise.all([loadImg(imgA_src), loadImg(imgB_src)]);
-          const width = Math.max(imgA.width + imgB.width, 1200);
-          const height = Math.max(Math.max(imgA.height, imgB.height), 700);
-          const canvas = document.createElement('canvas');
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          const g = ctx.createLinearGradient(0,0,0,height);
-          g.addColorStop(0, 'rgba(255,208,229,0.12)');
-          g.addColorStop(1, 'rgba(255,232,242,0.12)');
-          ctx.fillStyle = g; ctx.fillRect(0,0,width,height);
-          const halfW = Math.floor(width/2);
-          const aRatio = Math.min(halfW/imgA.width, height/imgA.height);
-          const aW = imgA.width * aRatio; const aH = imgA.height * aRatio;
-          const aX = Math.floor((halfW - aW)/2); const aY = Math.floor((height - aH)/2);
-          ctx.drawImage(imgA,aX,aY,aW,aH);
-          const bRatio = Math.min(halfW/imgB.width, height/imgB.height);
-          const bW = imgB.width * bRatio; const bH = imgB.height * bRatio;
-          const bX = halfW + Math.floor((halfW - bW)/2); const bY = Math.floor((height - bH)/2);
-          ctx.drawImage(imgB,bX,bY,bW,bH);
-          ctx.fillStyle = 'rgba(0,0,0,0.06)'; ctx.fillRect(0,0,width,height);
-          finalDataUrl = canvas.toDataURL('image/jpeg',0.92);
-        }
-
-        // Show full-screen overlay like index
+        // show combined full-screen
         const overlay = document.createElement('div');
         Object.assign(overlay.style, { position:'fixed', inset:0, display:'flex', alignItems:'center', justifyContent:'center', background:'linear-gradient(180deg, rgba(189,30,89,0.16), rgba(233,30,99,0.08))', zIndex:9999, padding:'20px' });
-        const imgEl = document.createElement('img'); imgEl.src = finalDataUrl; Object.assign(imgEl.style, { maxWidth:'95%', maxHeight:'95%', borderRadius:'14px', boxShadow:'0 30px 80px rgba(0,0,0,0.4)', objectFit:'cover' });
+        const imgEl = document.createElement('img'); imgEl.src = combined; Object.assign(imgEl.style, { maxWidth:'95%', maxHeight:'95%', borderRadius:'14px', boxShadow:'0 30px 80px rgba(0,0,0,0.4)', objectFit:'cover' });
         const close = document.createElement('button'); close.textContent='✕'; Object.assign(close.style, { position:'absolute', top:'18px', right:'18px', zIndex:10000, background:'rgba(255,255,255,0.9)', border:'none', width:'44px', height:'44px', borderRadius:'50%', cursor:'pointer', fontSize:'20px' });
         close.addEventListener('click', ()=> overlay.remove());
         overlay.appendChild(imgEl); overlay.appendChild(close); document.body.appendChild(overlay);
 
-        // replace content area with brief info
-        content.innerHTML = `<p class="text-gray-600">Invite from <strong>${creator.fullname || creator.username}</strong></p><p class="text-sm text-gray-500 mt-2">Click outside or ✕ to close.</p>`;
+        content.innerHTML = `<p class="text-gray-600">Invite from <strong>${creator.fullname || creator.username}</strong></p><p class="text-sm text-gray-500 mt-2">Click ✕ to close.</p>`;
       } catch (err) {
         console.error(err); content.innerHTML = '<p class="text-red-600">Failed to load invite photo.</p>';
       }
+    }
+
+    (function(){
+      const q = getQuery();
+      const sender = q.sender || '';
+      const receiver = q.receiver || '';
+      const content = document.getElementById('contentArea');
+
+      // If query present use it directly
+      if (sender && receiver) {
+        openInviteFor(sender, receiver, q.receiverPassword || '');
+        return;
+      }
+
+      // No query — show form to paste invite link or enter credentials
+      content.innerHTML = `
+        <div class="max-w-md mx-auto">
+          <label class="block text-sm text-gray-600 mb-2">Paste invite link</label>
+          <div class="flex gap-2">
+            <input id="pasteLink" class="flex-1 p-2 rounded border" placeholder="https://.../view-invite.html?sender=...&receiver=..." />
+            <button id="openLinkBtn" class="px-3 py-2 rounded bg-[#bd1e59] text-white">Open</button>
+          </div>
+          <div class="my-4 border-t pt-4">
+            <p class="text-sm text-gray-600 mb-2">Or enter details</p>
+            <input id="senderInput" class="w-full p-2 rounded border mb-2" placeholder="Sender username" />
+            <input id="receiverInput" class="w-full p-2 rounded border mb-2" placeholder="Receiver username" />
+            <input id="receiverPassInput" type="password" class="w-full p-2 rounded border mb-2" placeholder="Receiver password" />
+            <div class="flex gap-2">
+              <button id="openCredBtn" class="flex-1 px-3 py-2 rounded bg-[#bd1e59] text-white">Open with credentials</button>
+              <button id="clearBtn" class="flex-1 px-3 py-2 rounded bg-gray-200">Clear</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('openLinkBtn').addEventListener('click', ()=>{
+        const v = document.getElementById('pasteLink').value.trim();
+        if (!v) return alert('Please paste an invite link');
+        const params = parseInviteLink(v);
+        if (!params.sender || !params.receiver) return alert('Invalid invite link');
+        openInviteFor(params.sender, params.receiver, params.receiverPassword || '');
+      });
+
+      document.getElementById('openCredBtn').addEventListener('click', ()=>{
+        const s = document.getElementById('senderInput').value.trim();
+        const r = document.getElementById('receiverInput').value.trim();
+        const p = document.getElementById('receiverPassInput').value.trim();
+        if (!s || !r) return alert('Please enter sender and receiver usernames');
+        openInviteFor(s, r, p);
+      });
+
+      document.getElementById('clearBtn').addEventListener('click', ()=>{ document.getElementById('pasteLink').value = ''; document.getElementById('senderInput').value=''; document.getElementById('receiverInput').value=''; document.getElementById('receiverPassInput').value=''; });
     })();
   </script>
 </body>

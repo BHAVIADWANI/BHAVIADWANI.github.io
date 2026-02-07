@@ -317,26 +317,34 @@
             />
 
             <label for="receiverUsername">Receiver's Username (for invite)</label>
+              <input
+                type="text"
+                id="receiverUsername"
+                placeholder="Choose a username your receiver will use"
+                class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400 mb-4"
+              />
+              <label for="receiverPassword">Receiver's Password (for secure invite)</label>
+              <input
+                type="password"
+                id="receiverPassword"
+                placeholder="Set a password your receiver will use to open the invite"
+                class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400 mb-4"
+              />
+
+            <label for="receiverPassword">Receiver's Password (for secure invite)</label>
             <input
-              type="text"
-              id="receiverUsername"
-              placeholder="Choose a username your receiver will use"
+              type="password"
+              id="receiverPassword"
+              placeholder="Set a password your receiver will use to open the invite"
               class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400 mb-4"
             />
 
-            <label for="partnerPhoto">📷 Their Photo</label>
-            <div class="photo-upload-container" onclick="document.getElementById('partnerPhoto').click()">
-              <p id="partnerPhotoText">Click to upload their photo</p>
-              <input type="file" id="partnerPhoto" accept="image/*" onchange="handlePhotoPreview(this, 'partnerPhotoPreview')" />
+            <label for="combinedPhoto">📷 Combined Photo (both in one)</label>
+            <div class="photo-upload-container" onclick="document.getElementById('combinedPhoto').click()">
+              <p id="combinedPhotoText">Click to upload a single combined photo (both people in one image)</p>
+              <input type="file" id="combinedPhoto" accept="image/*" onchange="handlePhotoPreview(this, 'combinedPhotoPreview')" />
             </div>
-            <img id="partnerPhotoPreview" class="photo-preview" style="display:none;" />
-
-            <label for="yourPhoto" class="mt-6 block">📷 Your Photo</label>
-            <div class="photo-upload-container" onclick="document.getElementById('yourPhoto').click()">
-              <p id="yourPhotoText">Click to upload your photo</p>
-              <input type="file" id="yourPhoto" accept="image/*" onchange="handlePhotoPreview(this, 'yourPhotoPreview')" />
-            </div>
-            <img id="yourPhotoPreview" class="photo-preview" style="display:none;" />
+            <img id="combinedPhotoPreview" class="photo-preview" style="display:none;" />
           </div>
 
           <div class="button-group">
@@ -356,11 +364,11 @@
 
           <div>
             <label for="recoveryPhotoHim">📷 Recovery Photo - Him</label>
-            <div class="photo-upload-container" onclick="document.getElementById('recoveryPhotoHim').click()">
-              <p id="recoveryPhotoHimText">Click to upload recovery photo (him)</p>
-              <input type="file" id="recoveryPhotoHim" accept="image/*" onchange="handlePhotoPreview(this, 'recoveryPhotoHimPreview')" />
-            </div>
-            <img id="recoveryPhotoHimPreview" class="photo-preview" style="display:none;" />
+              <div class="photo-upload-container" onclick="document.getElementById('recoveryPhotoHim').click()">
+                <p id="recoveryPhotoHimText">Click to upload recovery photo (him)</p>
+                <input type="file" id="recoveryPhotoHim" accept="image/*" onchange="handlePhotoPreview(this, 'recoveryPhotoHimPreview')" />
+              </div>
+              <img id="recoveryPhotoHimPreview" class="photo-preview" style="display:none;" />
 
             <label for="recoveryPhotoHer" class="mt-6 block">📷 Recovery Photo - Her</label>
             <div class="photo-upload-container" onclick="document.getElementById('recoveryPhotoHer').click()">
@@ -388,15 +396,10 @@
 
             <div class="couple-preview">
               <div class="person-card">
-                <h4>💙 You</h4>
-                <p id="confirmYourName" class="text-sm text-gray-600 mb-2"></p>
-                <img id="confirmYourPhoto" style="display:none;" />
-              </div>
-              <div class="person-card">
-                <h4>💗 Your Special One</h4>
-                <p id="confirmPartnerName" class="text-sm text-gray-600 mb-2"></p>
-                <img id="confirmPartnerPhoto" style="display:none;" />
-              </div>
+                        <h4>💙 You & Your Special One</h4>
+                        <p id="confirmYourName" class="text-sm text-gray-600 mb-2"></p>
+                        <img id="confirmCombinedPhoto" style="display:none;" />
+                      </div>
             </div>
 
             <div id="inviteLinkContainer" class="mt-4 text-center" style="display:none;">
@@ -563,16 +566,15 @@
           return false;
         }
 
-        const partnerPhotoFile = document.getElementById('partnerPhoto').files[0];
-        const yourPhotoFile = document.getElementById('yourPhoto').files[0];
-
-        if (!partnerPhotoFile || !yourPhotoFile) {
-          alert('Please upload photos for both');
+        const combinedFile = document.getElementById('combinedPhoto').files[0];
+        if (!combinedFile) {
+          alert('Please upload a combined photo that includes both people');
           return false;
         }
 
         formData.partnerName = partnerName;
         formData.receiverUsername = receiverUsername || '';
+        formData.receiverPassword = document.getElementById('receiverPassword')?.value?.trim() || '';
         return true;
       }
 
@@ -649,18 +651,11 @@
       document.getElementById('confirmYourName').textContent = 'Name: ' + formData.yourName;
       document.getElementById('confirmPartnerName').textContent = 'Name: ' + formData.partnerName;
 
-      // Show photos
-      const yourPhotoPreview = document.getElementById('yourPhotoPreview').src;
-      const partnerPhotoPreview = document.getElementById('partnerPhotoPreview').src;
-
-      if (yourPhotoPreview) {
-        document.getElementById('confirmYourPhoto').src = yourPhotoPreview;
-        document.getElementById('confirmYourPhoto').style.display = 'block';
-      }
-
-      if (partnerPhotoPreview) {
-        document.getElementById('confirmPartnerPhoto').src = partnerPhotoPreview;
-        document.getElementById('confirmPartnerPhoto').style.display = 'block';
+      // Show combined photo if present
+      const combinedPreview = document.getElementById('combinedPhotoPreview').src;
+      if (combinedPreview) {
+        document.getElementById('confirmCombinedPhoto').src = combinedPreview;
+        document.getElementById('confirmCombinedPhoto').style.display = 'block';
       }
 
       // Invite link (use relative path)
@@ -682,9 +677,8 @@
         return;
       }
 
-      // Convert all photos to Base64
-      const photoHim = await getBase64FromFile('partnerPhoto');
-      const photoHer = await getBase64FromFile('yourPhoto');
+      // Convert photos to Base64 (single combined photo used as primary)
+      const photoCombined = await getBase64FromFile('combinedPhoto');
       const recoveryPhotoHim = await getBase64FromFile('recoveryPhotoHim');
       const recoveryPhotoHer = await getBase64FromFile('recoveryPhotoHer');
 
@@ -693,6 +687,7 @@
 
       // Create new user object
       const receiverUsername = formData.receiverUsername || document.getElementById('receiverUsername')?.value?.trim() || '';
+      const receiverPassword = formData.receiverPassword || document.getElementById('receiverPassword')?.value?.trim() || '';
 
       const newUser = {
         fullname: formData.yourName,
@@ -701,9 +696,11 @@
         password: formData.password,
         whoFor: formData.whoFor,
         partnerName: formData.partnerName,
-        receiverUsername: receiverUsername,
-        photoHim: photoHim,
-        photoHer: photoHer,
+          receiverUsername: receiverUsername,
+          receiverPassword: receiverPassword,
+          photoCombined: photoCombined,
+          photoHer: photoCombined,
+          photoHim: null,
         recoveryPhotoHim: recoveryPhotoHim,
         recoveryPhotoHer: recoveryPhotoHer,
         joined: new Date().toISOString().split('T')[0],
