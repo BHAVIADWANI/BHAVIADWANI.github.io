@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>You've Got an Invite 💌</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: linear-gradient(180deg, rgba(255,208,229,0.06), rgba(255,232,242,0.04)); min-height:100vh; }
+    .center { display:flex; align-items:center; justify-content:center; height:100vh; }
+    .card { background: rgba(255,255,255,0.9); padding:24px; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.12); max-width:900px; width:100%; }
+  </style>
+</head>
+<body>
+  <div class="center p-4">
+    <div class="card text-center">
+      <h1 class="text-2xl font-bold text-[#bd1e59] mb-2">You received a Valentine's invite 💌</h1>
+      <p class="text-gray-600 mb-4">Open the invite to see the special photo.</p>
+      <div id="contentArea">
+        <p class="text-sm text-gray-500">Loading...</p>
+      </div>
+      <div class="mt-4">
+        <a id="homeLink" href="login.html" class="px-4 py-2 rounded bg-[#bd1e59] text-white">Back to Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // parse query
+    function getQuery() {
+      const q = {};
+      location.search.substring(1).split('&').forEach(pair => {
+        if (!pair) return;
+        const [k,v] = pair.split('=');
+        q[decodeURIComponent(k)] = decodeURIComponent(v || '');
+      });
+      return q;
+    }
+
+    (async function(){
+      const q = getQuery();
+      const sender = q.sender || '';
+      const receiver = q.receiver || '';
+      const content = document.getElementById('contentArea');
+      if (!sender || !receiver) {
+        content.innerHTML = '<p class="text-red-600">Invalid invite link.</p>';
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const creator = users.find(u => u.username === sender && (u.receiverUsername === receiver));
+      if (!creator) {
+        content.innerHTML = '<p class="text-red-600">Invite not found or it has expired.</p>';
+        return;
+      }
+
+      // Create combined image similar to signup/index logic
+      const imgA_src = creator.photoHer || null;
+      const imgB_src = creator.photoHim || null;
+
+      if (!imgA_src && !imgB_src) {
+        content.innerHTML = '<p class="text-gray-600">No photos available.</p>';
+        return;
+      }
+
+      function loadImg(src) {
+        return new Promise((res, rej) => {
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          img.onload = () => res(img);
+          img.onerror = rej;
+          img.src = src;
+        });
+      }
+
+      try {
+        let finalDataUrl = null;
+        if (imgA_src && !imgB_src) finalDataUrl = imgA_src;
+        else if (!imgA_src && imgB_src) finalDataUrl = imgB_src;
+        else {
+          const [imgA, imgB] = await Promise.all([loadImg(imgA_src), loadImg(imgB_src)]);
+          const width = Math.max(imgA.width + imgB.width, 1200);
+          const height = Math.max(Math.max(imgA.height, imgB.height), 700);
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          const g = ctx.createLinearGradient(0,0,0,height);
+          g.addColorStop(0, 'rgba(255,208,229,0.12)');
+          g.addColorStop(1, 'rgba(255,232,242,0.12)');
+          ctx.fillStyle = g; ctx.fillRect(0,0,width,height);
+          const halfW = Math.floor(width/2);
+          const aRatio = Math.min(halfW/imgA.width, height/imgA.height);
+          const aW = imgA.width * aRatio; const aH = imgA.height * aRatio;
+          const aX = Math.floor((halfW - aW)/2); const aY = Math.floor((height - aH)/2);
+          ctx.drawImage(imgA,aX,aY,aW,aH);
+          const bRatio = Math.min(halfW/imgB.width, height/imgB.height);
+          const bW = imgB.width * bRatio; const bH = imgB.height * bRatio;
+          const bX = halfW + Math.floor((halfW - bW)/2); const bY = Math.floor((height - bH)/2);
+          ctx.drawImage(imgB,bX,bY,bW,bH);
+          ctx.fillStyle = 'rgba(0,0,0,0.06)'; ctx.fillRect(0,0,width,height);
+          finalDataUrl = canvas.toDataURL('image/jpeg',0.92);
+        }
+
+        // Show full-screen overlay like index
+        const overlay = document.createElement('div');
+        Object.assign(overlay.style, { position:'fixed', inset:0, display:'flex', alignItems:'center', justifyContent:'center', background:'linear-gradient(180deg, rgba(189,30,89,0.16), rgba(233,30,99,0.08))', zIndex:9999, padding:'20px' });
+        const imgEl = document.createElement('img'); imgEl.src = finalDataUrl; Object.assign(imgEl.style, { maxWidth:'95%', maxHeight:'95%', borderRadius:'14px', boxShadow:'0 30px 80px rgba(0,0,0,0.4)', objectFit:'cover' });
+        const close = document.createElement('button'); close.textContent='✕'; Object.assign(close.style, { position:'absolute', top:'18px', right:'18px', zIndex:10000, background:'rgba(255,255,255,0.9)', border:'none', width:'44px', height:'44px', borderRadius:'50%', cursor:'pointer', fontSize:'20px' });
+        close.addEventListener('click', ()=> overlay.remove());
+        overlay.appendChild(imgEl); overlay.appendChild(close); document.body.appendChild(overlay);
+
+        // replace content area with brief info
+        content.innerHTML = `<p class="text-gray-600">Invite from <strong>${creator.fullname || creator.username}</strong></p><p class="text-sm text-gray-500 mt-2">Click outside or ✕ to close.</p>`;
+      } catch (err) {
+        console.error(err); content.innerHTML = '<p class="text-red-600">Failed to load invite photo.</p>';
+      }
+    })();
+  </script>
+</body>
+</html>

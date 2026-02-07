@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Your Love Story - Valentine's Day</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .gradient-background {
+      background: rgb(255, 208, 229);
+      background: linear-gradient(180deg, rgba(255, 208, 229, 1) 0%, rgba(255, 232, 242, 1) 36%, rgba(255, 255, 255, 1) 100%);
+    }
+
+    .step-container {
+      display: none;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    .step-container.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .progress-bar {
+      background: #e91e63;
+      height: 4px;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .input-field {
+      border: 2px solid #bd1e59;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(189, 30, 89, 0.1);
+      border-color: #bd1e59;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      flex: 1;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #bd1e59 0%, #e91e63 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(189, 30, 89, 0.3);
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #bd1e59;
+      border: 2px solid #bd1e59;
+    }
+
+    .btn-secondary:hover {
+      background: #fce4ec;
+    }
+
+    .photo-preview {
+      max-width: 100%;
+      height: auto;
+      max-height: 250px;
+      border-radius: 10px;
+      margin-top: 10px;
+      border: 2px solid #bd1e59;
+    }
+
+    .photo-upload-container {
+      background: #fce4ec;
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px dashed #bd1e59;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .photo-upload-container:hover {
+      background: #f8bbd0;
+    }
+
+    .photo-upload-container input[type="file"] {
+      display: none;
+    }
+
+    .question-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px solid #e91e63;
+      margin-bottom: 15px;
+    }
+
+    .step-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #bd1e59;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .step-subtitle {
+      color: #666;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .radio-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .radio-option {
+      padding: 15px;
+      border: 2px solid #bd1e59;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .radio-option input[type="radio"] {
+      display: none;
+    }
+
+    .radio-option input[type="radio"]:checked + label {
+      color: white;
+      background: #bd1e59;
+    }
+
+    .radio-option:has(input:checked) {
+      background: #bd1e59;
+      color: white;
+    }
+
+    .radio-option label {
+      cursor: pointer;
+      margin: 0;
+      display: block;
+      font-weight: 600;
+    }
+
+    .couple-preview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .person-card {
+      text-align: center;
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+      border: 2px solid #bd1e59;
+    }
+
+    .person-card h4 {
+      color: #bd1e59;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .person-card img {
+      max-width: 100%;
+      height: auto;
+      max-height: 200px;
+      border-radius: 8px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #bd1e59;
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body class="gradient-background min-h-screen py-10">
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-2xl">
+      <!-- Progress Bar -->
+      <div class="mb-8">
+        <div class="bg-gray-200 rounded-full h-2 mb-2">
+          <div id="progressBar" class="progress-bar" style="width: 20%;"></div>
+        </div>
+        <p class="text-center text-sm text-gray-600" id="stepIndicator">Step 1 of 5</p>
+      </div>
+
+      <!-- Card Container -->
+      <div class="bg-white rounded-lg shadow-lg p-8">
+        <!-- Step 1: Welcome -->
+        <div id="step1" class="step-container active">
+          <div class="text-center mb-6">
+            <div style="font-size: 60px; margin-bottom: 10px;">❤️</div>
+            <h1 class="step-title">Create Your Love Story</h1>
+            <p class="step-subtitle">Tell us about your special someone!</p>
+          </div>
+
+          <div class="question-card">
+            <p class="font-semibold text-gray-700 mb-4 text-center">Who are you creating this form for?</p>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="whoFor1" name="whoFor" value="him" />
+                <label for="whoFor1">👨 For Him</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="whoFor2" name="whoFor" value="her" />
+                <label for="whoFor2">👩 For Her</label>
+              </div>
+              <!--<div class="radio-option">
+                <input type="radio" id="whoFor3" name="whoFor" value="couple" />
+                <label for="whoFor3">👫 For Both</label>
+              </div>-->
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button class="btn btn-primary" onclick="nextStep()">Continue →</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Personal Info -->
+        <div id="step2" class="step-container">
+          <h2 class="step-title">About You</h2>
+          <p class="step-subtitle">Tell us your details</p>
+
+          <div>
+            <label for="yourName">Your Full Name</label>
+            <input
+              type="text"
+              id="yourName"
+              placeholder="Enter your name"
+              class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400 mb-4"
+              required
+            />
+
+            <label for="yourEmail">Your Email</label>
+            <input
+              type="email"
+              id="yourEmail"
+              placeholder="Enter your email"
+              class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400 mb-4"
+              required
+            />
+
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Choose your username"
+              class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400 mb-4"
+              required
+            />
+
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Create a password"
+              class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400 mb-4"
+              required
+            />
+          </div>
+
+          <div class="button-group">
+            <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+            <button class="btn btn-primary" onclick="nextStep()">Continue →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Partner Info & Photos -->
+        <div id="step3" class="step-container">
+          <h2 class="step-title">About Your Special One</h2>
+          <p class="step-subtitle">Share photos and details</p>
+
+          <div>
+            <label for="partnerName">Their Full Name</label>
+            <input
+              type="text"
+              id="partnerName"
+              placeholder="Enter their name"
+              class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400 mb-4"
+              required
+            />
+
+            <label for="receiverUsername">Receiver's Username (for invite)</label>
+            <input
+              type="text"
+              id="receiverUsername"
+              placeholder="Choose a username your receiver will use"
+              class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400 mb-4"
+            />
+
+            <label for="partnerPhoto">📷 Their Photo</label>
+            <div class="photo-upload-container" onclick="document.getElementById('partnerPhoto').click()">
+              <p id="partnerPhotoText">Click to upload their photo</p>
+              <input type="file" id="partnerPhoto" accept="image/*" onchange="handlePhotoPreview(this, 'partnerPhotoPreview')" />
+            </div>
+            <img id="partnerPhotoPreview" class="photo-preview" style="display:none;" />
+
+            <label for="yourPhoto" class="mt-6 block">📷 Your Photo</label>
+            <div class="photo-upload-container" onclick="document.getElementById('yourPhoto').click()">
+              <p id="yourPhotoText">Click to upload your photo</p>
+              <input type="file" id="yourPhoto" accept="image/*" onchange="handlePhotoPreview(this, 'yourPhotoPreview')" />
+            </div>
+            <img id="yourPhotoPreview" class="photo-preview" style="display:none;" />
+          </div>
+
+          <div class="button-group">
+            <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+            <button class="btn btn-primary" onclick="nextStep()">Continue →</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Recovery Photos -->
+        <div id="step4" class="step-container">
+          <h2 class="step-title">Recovery Photos</h2>
+          <p class="step-subtitle">Upload photos for account recovery</p>
+
+          <div class="question-card">
+            <p class="text-sm text-gray-600 mb-3">💡 These photos will help you recover your account. We'll show them during password reset.</p>
+          </div>
+
+          <div>
+            <label for="recoveryPhotoHim">📷 Recovery Photo - Him</label>
+            <div class="photo-upload-container" onclick="document.getElementById('recoveryPhotoHim').click()">
+              <p id="recoveryPhotoHimText">Click to upload recovery photo (him)</p>
+              <input type="file" id="recoveryPhotoHim" accept="image/*" onchange="handlePhotoPreview(this, 'recoveryPhotoHimPreview')" />
+            </div>
+            <img id="recoveryPhotoHimPreview" class="photo-preview" style="display:none;" />
+
+            <label for="recoveryPhotoHer" class="mt-6 block">📷 Recovery Photo - Her</label>
+            <div class="photo-upload-container" onclick="document.getElementById('recoveryPhotoHer').click()">
+              <p id="recoveryPhotoHerText">Click to upload recovery photo (her)</p>
+              <input type="file" id="recoveryPhotoHer" accept="image/*" onchange="handlePhotoPreview(this, 'recoveryPhotoHerPreview')" />
+            </div>
+            <img id="recoveryPhotoHerPreview" class="photo-preview" style="display:none;" />
+          </div>
+
+          <div class="button-group">
+            <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+            <button class="btn btn-primary" onclick="nextStep()">Continue →</button>
+          </div>
+        </div>
+
+        <!-- Step 5: Confirmation -->
+        <div id="step5" class="step-container">
+          <h2 class="step-title">Confirm Your Details</h2>
+          <p class="step-subtitle">Review everything before creating your account</p>
+
+          <div class="bg-gray-50 p-6 rounded-lg mb-6">
+            <div class="mb-4">
+              <p class="text-sm text-gray-600">Creating form for: <span id="confirmWhoFor" class="font-bold text-[#bd1e59]"></span></p>
+            </div>
+
+            <div class="couple-preview">
+              <div class="person-card">
+                <h4>💙 You</h4>
+                <p id="confirmYourName" class="text-sm text-gray-600 mb-2"></p>
+                <img id="confirmYourPhoto" style="display:none;" />
+              </div>
+              <div class="person-card">
+                <h4>💗 Your Special One</h4>
+                <p id="confirmPartnerName" class="text-sm text-gray-600 mb-2"></p>
+                <img id="confirmPartnerPhoto" style="display:none;" />
+              </div>
+            </div>
+
+            <div id="inviteLinkContainer" class="mt-4 text-center" style="display:none;">
+              <p class="text-sm text-gray-600 mb-2">Invite link for your receiver:</p>
+              <input id="inviteLinkInput" class="w-full text-sm p-2 rounded border" readonly />
+              <div class="mt-2">
+                <button type="button" onclick="copyInviteLink()" class="btn btn-secondary">Copy Link</button>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-gray-300">
+              <p class="text-xs text-gray-500 mb-3">Recovery photos saved: ✓</p>
+              <label class="flex items-center">
+                <input type="checkbox" id="agreeTerms" class="w-4 h-4 text-[#bd1e59] rounded" required />
+                <span class="ml-2 text-sm text-gray-600">I agree to the <span class="text-[#bd1e59] font-semibold">Terms of Love ❤️</span></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+            <button class="btn btn-primary" onclick="submitSignup()">✨ Create Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 5;
+    const formData = {};
+
+    // Add CSS for button group if not present
+    const style = document.createElement('style');
+    style.textContent = `
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 25px;
+        justify-content: center;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 16px;
+      }
+
+      .btn-primary {
+        background: #bd1e59;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #9b1649;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(189, 30, 89, 0.3);
+      }
+
+      .btn-secondary {
+        background: #e8e8e8;
+        color: #bd1e59;
+      }
+
+      .btn-secondary:hover {
+        background: #d0d0d0;
+        transform: translateY(-2px);
+      }
+
+      .photo-preview {
+        max-width: 200px;
+        max-height: 200px;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 2px solid #bd1e59;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    function updateProgress() {
+      const progress = (currentStep / totalSteps) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+      document.getElementById('stepIndicator').textContent = `Step ${currentStep} of ${totalSteps}`;
+    }
+
+    function showStep(step) {
+      // Hide all steps
+      document.querySelectorAll('.step-container').forEach(el => {
+        el.classList.remove('active');
+      });
+      // Show current step
+      document.getElementById(`step${step}`).classList.add('active');
+      updateProgress();
+      window.scrollTo(0, 0);
+    }
+
+    function validateStep(step) {
+      if (step === 1) {
+        const whoFor = document.querySelector('input[name="whoFor"]:checked');
+        if (!whoFor) {
+          alert('Please select who you are creating this form for');
+          return false;
+        }
+        formData.whoFor = whoFor.value;
+        return true;
+      }
+
+      if (step === 2) {
+        const yourName = document.getElementById('yourName').value.trim();
+        const yourEmail = document.getElementById('yourEmail').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!yourName || !yourEmail || !username || !password) {
+          alert('Please fill in all fields');
+          return false;
+        }
+
+        if (password.length < 6) {
+          alert('Password must be at least 6 characters long');
+          return false;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(yourEmail)) {
+          alert('Please enter a valid email');
+          return false;
+        }
+
+        // Check if username exists
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        if (users.some(u => u.username === username)) {
+          alert('Username already exists');
+          return false;
+        }
+
+        if (users.some(u => u.email === yourEmail)) {
+          alert('Email already exists');
+          return false;
+        }
+
+        formData.yourName = yourName;
+        formData.yourEmail = yourEmail;
+        formData.username = username;
+        formData.password = password;
+        return true;
+      }
+
+      if (step === 3) {
+        const partnerName = document.getElementById('partnerName').value.trim();
+        const receiverUsername = document.getElementById('receiverUsername').value.trim();
+        if (!partnerName) {
+          alert('Please enter their name');
+          return false;
+        }
+
+        const partnerPhotoFile = document.getElementById('partnerPhoto').files[0];
+        const yourPhotoFile = document.getElementById('yourPhoto').files[0];
+
+        if (!partnerPhotoFile || !yourPhotoFile) {
+          alert('Please upload photos for both');
+          return false;
+        }
+
+        formData.partnerName = partnerName;
+        formData.receiverUsername = receiverUsername || '';
+        return true;
+      }
+
+      if (step === 4) {
+        const recoveryPhotoHimFile = document.getElementById('recoveryPhotoHim').files[0];
+        const recoveryPhotoHerFile = document.getElementById('recoveryPhotoHer').files[0];
+
+        if (!recoveryPhotoHimFile || !recoveryPhotoHerFile) {
+          alert('Please upload both recovery photos');
+          return false;
+        }
+
+        return true;
+      }
+
+      return true;
+    }
+
+    function nextStep() {
+      if (validateStep(currentStep)) {
+        if (currentStep < totalSteps) {
+          currentStep++;
+          showStep(currentStep);
+
+          // Populate confirmation step
+          if (currentStep === 5) {
+            populateConfirmation();
+          }
+        }
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }
+
+    function handlePhotoPreview(input, previewId) {
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById(previewId);
+          img.src = e.target.result;
+          img.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function getBase64FromFile(fileId) {
+      return new Promise((resolve) => {
+        const file = document.getElementById(fileId).files[0];
+        if (!file) {
+          resolve(null);
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          resolve(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function populateConfirmation() {
+      // Show whoFor
+      const whoForText = formData.whoFor === 'him' ? '👨 For Him' : '👩 For Her';
+      document.getElementById('confirmWhoFor').textContent = whoForText;
+
+      // Show names
+      document.getElementById('confirmYourName').textContent = 'Name: ' + formData.yourName;
+      document.getElementById('confirmPartnerName').textContent = 'Name: ' + formData.partnerName;
+
+      // Show photos
+      const yourPhotoPreview = document.getElementById('yourPhotoPreview').src;
+      const partnerPhotoPreview = document.getElementById('partnerPhotoPreview').src;
+
+      if (yourPhotoPreview) {
+        document.getElementById('confirmYourPhoto').src = yourPhotoPreview;
+        document.getElementById('confirmYourPhoto').style.display = 'block';
+      }
+
+      if (partnerPhotoPreview) {
+        document.getElementById('confirmPartnerPhoto').src = partnerPhotoPreview;
+        document.getElementById('confirmPartnerPhoto').style.display = 'block';
+      }
+
+      // Invite link (use relative path)
+      const receiver = formData.receiverUsername || '';
+      const sender = formData.username || '';
+      if (sender && receiver) {
+        const link = `view-invite.html?sender=${encodeURIComponent(sender)}&receiver=${encodeURIComponent(receiver)}`;
+        const container = document.getElementById('inviteLinkContainer');
+        const input = document.getElementById('inviteLinkInput');
+        input.value = link;
+        container.style.display = 'block';
+      }
+    }
+
+    async function submitSignup() {
+      const agreeTerms = document.getElementById('agreeTerms').checked;
+      if (!agreeTerms) {
+        alert('Please agree to the Terms of Love');
+        return;
+      }
+
+      // Convert all photos to Base64
+      const photoHim = await getBase64FromFile('partnerPhoto');
+      const photoHer = await getBase64FromFile('yourPhoto');
+      const recoveryPhotoHim = await getBase64FromFile('recoveryPhotoHim');
+      const recoveryPhotoHer = await getBase64FromFile('recoveryPhotoHer');
+
+      // Get existing users
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+
+      // Create new user object
+      const receiverUsername = formData.receiverUsername || document.getElementById('receiverUsername')?.value?.trim() || '';
+
+      const newUser = {
+        fullname: formData.yourName,
+        email: formData.yourEmail,
+        username: formData.username,
+        password: formData.password,
+        whoFor: formData.whoFor,
+        partnerName: formData.partnerName,
+        receiverUsername: receiverUsername,
+        photoHim: photoHim,
+        photoHer: photoHer,
+        recoveryPhotoHim: recoveryPhotoHim,
+        recoveryPhotoHer: recoveryPhotoHer,
+        joined: new Date().toISOString().split('T')[0],
+        status: 'active',
+        role: 'user'
+      };
+
+      // generate invite link and attach to user
+      if (newUser.username && newUser.receiverUsername) {
+        newUser.inviteLink = `view-invite.html?sender=${encodeURIComponent(newUser.username)}&receiver=${encodeURIComponent(newUser.receiverUsername)}`;
+      }
+
+      // Add new user to users array
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+
+      // copy invite link to clipboard if exists
+      if (newUser.inviteLink && navigator.clipboard) {
+        try { await navigator.clipboard.writeText(newUser.inviteLink); } catch (e) {}
+      }
+
+      alert('✨ Account created successfully! The invite link has been generated and copied to your clipboard (if supported). Redirecting to login...');
+      window.location.href = 'login.html';
+    }
+
+    // Initialize
+    showStep(1);
+
+    function copyInviteLink() {
+      const input = document.getElementById('inviteLinkInput');
+      if (!input) return;
+      input.select();
+      input.setSelectionRange(0, 99999);
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(input.value).then(() => {
+          alert('Invite link copied to clipboard');
+        }).catch(() => {
+          document.execCommand('copy');
+          alert('Invite link copied (fallback)');
+        });
+      } else {
+        document.execCommand('copy');
+        alert('Invite link copied');
+      }
+    }
+  </script>
+</body>
+</html>

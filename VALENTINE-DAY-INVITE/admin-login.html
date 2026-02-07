@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Valentine's Day</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .admin-gradient-background {
+      background: linear-gradient(135deg, #bd1e59 0%, #e91e63 50%, #c2185b 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .admin-card {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(189, 30, 89, 0.4);
+      width: 100%;
+      max-width: 450px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admin-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #bd1e59, #e91e63, #c2185b);
+    }
+
+    .admin-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .admin-icon {
+      font-size: 60px;
+      margin-bottom: 15px;
+      animation: iconPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .admin-title {
+      font-size: 28px;
+      font-weight: bold;
+      color: #bd1e59;
+      margin-bottom: 5px;
+    }
+
+    .admin-subtitle {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .security-badge {
+      display: inline-block;
+      background: #e91e63;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-top: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .input-field {
+      border: 2px solid #bd1e59;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(189, 30, 89, 0.1);
+      border-color: #bd1e59;
+    }
+
+    .login-button {
+      background: linear-gradient(135deg, #bd1e59 0%, #e91e63 100%);
+      transition: all 0.3s ease;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .login-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(189, 30, 89, 0.4);
+    }
+
+    .login-button:active {
+      transform: translateY(0);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .label {
+      display: block;
+      font-weight: 600;
+      color: #bd1e59;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #bd1e59;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .back-link a:hover {
+      color: #e91e63;
+      text-decoration: underline;
+    }
+
+    .warning-message {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 12px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #e65100;
+    }
+
+    .warning-message strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .error-message {
+      background: #ffebee;
+      border-left: 4px solid #f44336;
+      padding: 12px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #c62828;
+      display: none;
+    }
+
+    .success-message {
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+      padding: 12px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #2e7d32;
+      display: none;
+    }
+
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .remember-forgot a {
+      color: #bd1e59;
+      text-decoration: none;
+    }
+
+    .remember-forgot a:hover {
+      text-decoration: underline;
+    }
+
+    .admin-features {
+      background: #fce4ec;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 25px;
+      border-left: 4px solid #bd1e59;
+    }
+
+    .admin-features h4 {
+      color: #bd1e59;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .admin-features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .admin-features li {
+      color: #666;
+      font-size: 12px;
+      padding: 4px 0;
+    }
+
+    .admin-features li:before {
+      content: '✓ ';
+      color: #bd1e59;
+      font-weight: bold;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body class="admin-gradient-background">
+  <div class="admin-card">
+    <!-- Admin Header -->
+    <div class="admin-header">
+      <div class="admin-icon">🔐</div>
+      <h1 class="admin-title">Admin Portal</h1>
+      <p class="admin-subtitle">Valentine's Day Management System</p>
+      <span class="security-badge">🛡️ SECURE ACCESS ONLY</span>
+    </div>
+
+    <!-- Warning Message -->
+    <div class="warning-message">
+      <strong>⚠️ Authorized Access Only</strong>
+      Unauthorized access attempts are logged. Only admin credentials are permitted.
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" id="errorMessage"></div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage"></div>
+
+    <!-- Admin Login Form -->
+    <form id="adminLoginForm" class="space-y-0">
+      <!-- Username/Email Input -->
+      <div class="form-group">
+        <label for="admin-email" class="label">👤 Admin Username or Email</label>
+        <input
+          type="text"
+          id="admin-email"
+          name="admin-email"
+          placeholder="Enter your admin credentials"
+          class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400"
+          required
+          autocomplete="username"
+        />
+      </div>
+
+      <!-- Password Input -->
+      <div class="form-group">
+        <label for="admin-password" class="label">🔑 Admin Password</label>
+        <input
+          type="password"
+          id="admin-password"
+          name="admin-password"
+          placeholder="Enter your admin password"
+          class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400"
+          required
+          autocomplete="current-password"
+        />
+      </div>
+
+      <!-- Remember & Forgot -->
+      <div class="remember-forgot">
+        <label class="flex items-center cursor-pointer">
+          <input type="checkbox" name="admin-remember" class="w-4 h-4 text-[#bd1e59] rounded" />
+          <span class="ml-2 text-gray-600">Remember this device</span>
+        </label>
+        <a href="forgot-password.html">Forgot password?</a>
+      </div>
+
+      <!-- Login Button -->
+      <button
+        type="submit"
+        class="login-button w-full py-3 px-4 bg-[#bd1e59] text-white rounded-lg text-lg cursor-pointer mb-4"
+      >
+        🔓 Access Admin Panel
+      </button>
+    </form>
+
+    <!-- Admin Features -->
+    <div class="admin-features">
+      <h4>📊 Admin Features:</h4>
+      <ul>
+        <li>Manage all user accounts</li>
+        <li>View user statistics</li>
+        <li>Edit & delete users</li>
+        <li>Monitor user photos</li>
+        <li>System analytics</li>
+      </ul>
+    </div>
+
+    <!-- Back to Login -->
+    <div class="back-link">
+      <a href="login.html">← Back to User Login</a>
+    </div>
+  </div>
+
+  <script>
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+
+    // Check if already logged in as admin
+    window.addEventListener('load', function() {
+      const currentUser = localStorage.getItem('currentUser');
+      const rememberDevice = localStorage.getItem('rememberAdminDevice');
+
+      if (currentUser && rememberDevice) {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(u => u.username === currentUser);
+        
+        if (user && (user.role === 'admin' || user.username === 'admin')) {
+          window.location.href = 'admin.html';
+        }
+      }
+    });
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = 'block';
+      successMessage.style.display = 'none';
+      setTimeout(() => {
+        errorMessage.style.display = 'none';
+      }, 5000);
+    }
+
+    function showSuccess(message) {
+      successMessage.textContent = message;
+      successMessage.style.display = 'block';
+      errorMessage.style.display = 'none';
+    }
+
+    adminLoginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('admin-email').value;
+      const password = document.getElementById('admin-password').value;
+      const remember = document.querySelector('input[name="admin-remember"]').checked;
+
+      if (email.trim() === '' || password.trim() === '') {
+        showError('❌ Please enter both username and password');
+        return;
+      }
+
+      // Get users from localStorage
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const user = users.find(u => (u.username === email || u.email === email) && u.password === password);
+
+      if (!user) {
+        showError('❌ Invalid admin credentials');
+        return;
+      }
+
+      // Check if user is admin
+      if (user.role !== 'admin' && user.username !== 'admin') {
+        showError('❌ Access Denied! This account does not have admin privileges.');
+        return;
+      }
+
+      // Successful login
+      localStorage.setItem('currentUser', user.username);
+      
+      if (remember) {
+        localStorage.setItem('rememberAdminDevice', 'true');
+      } else {
+        localStorage.removeItem('rememberAdminDevice');
+      }
+
+      showSuccess('✅ Admin authentication successful. Redirecting...');
+      
+      setTimeout(() => {
+        window.location.href = 'admin.html';
+      }, 1500);
+    });
+
+    // Focus effects
+    const inputs = document.querySelectorAll('input[type="text"], input[type="password"]');
+    inputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.parentElement.classList.add('transform', 'scale-105');
+      });
+      input.addEventListener('blur', function() {
+        this.parentElement.classList.remove('transform', 'scale-105');
+      });
+    });
+  </script>
+</body>
+</html>

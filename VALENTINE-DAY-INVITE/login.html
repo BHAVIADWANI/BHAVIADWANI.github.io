@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Valentine's Day</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .gradient-background {
+      background: rgb(255, 208, 229);
+      background: linear-gradient(180deg, rgba(255, 208, 229, 1) 0%, rgba(255, 232, 242, 1) 36%, rgba(255, 255, 255, 1) 100%);
+    }
+
+    .heart-icon {
+      font-size: 48px;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    .input-field {
+      border: 2px solid #bd1e59;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(189, 30, 89, 0.1);
+      border-color: #bd1e59;
+    }
+
+    .login-button {
+      background: linear-gradient(135deg, #bd1e59 0%, #e91e63 100%);
+      transition: all 0.3s ease;
+    }
+
+    .login-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(189, 30, 89, 0.3);
+    }
+
+    .login-button:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="gradient-background">
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md">
+      <!-- Card Container -->
+      <div class="bg-white rounded-lg shadow-lg p-8">
+        <!-- Heart Icon -->
+        <div class="text-center mb-6">
+          <div class="heart-icon inline-block">❤️</div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-center text-[#bd1e59] mb-2">Welcome</h1>
+        <p class="text-center text-gray-600 mb-8">Log in to share your love</p>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="space-y-6">
+          <!-- Email/Username Input -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-[#bd1e59] mb-2">Email or Username</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Enter your email or username"
+              class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400"
+              required
+            />
+          </div>
+
+          <!-- Password Input -->
+          <div>
+            <label for="password" class="block text-sm font-medium text-[#bd1e59] mb-2">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              class="input-field w-full px-4 py-3 rounded-lg text-gray-700 placeholder-gray-400"
+              required
+            />
+          </div>
+
+          <!-- Remember Me & Forgot Password -->
+          <div class="flex items-center justify-between text-sm">
+            <label class="flex items-center cursor-pointer">
+              <input type="checkbox" name="remember" class="w-4 h-4 text-[#bd1e59] rounded focus:ring-2 focus:ring-[#bd1e59]" />
+              <span class="ml-2 text-gray-600">Remember me</span>
+            </label>
+            <a href="forgot-password.html" class="text-[#bd1e59] hover:text-red-600 transition">Forgot password?</a>
+          </div>
+
+          <!-- Login Button -->
+          <button
+            type="submit"
+            class="login-button w-full py-3 px-4 bg-[#bd1e59] text-white font-bold rounded-lg text-lg cursor-pointer"
+          >
+            Login
+          </button>
+        </form>
+
+        <!-- Sign Up Link -->
+        <p class="text-center text-gray-600 mt-8">
+          Don't have an account?
+          <a href="signup.html" class="text-[#bd1e59] font-bold hover:text-red-600 transition">Sign up here</a>
+        </p>
+      </div>
+
+      <!-- Footer Message -->
+      <p class="text-center text-gray-500 text-sm mt-6">Love is in the air ✨</p>
+      <p class="text-center text-gray-500 text-sm mt-2">
+        <a href="admin-login.html" class="text-[#bd1e59] hover:text-red-600 text-xs font-semibold">🔐 Admin Portal</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+
+    // Initialize localStorage with default admin user if not exists
+    window.addEventListener('load', function() {
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+      const adminExists = users.some(u => u.username === 'admin');
+      
+      if (!adminExists) {
+        users.push({
+          username: 'admin',
+          password: 'Waheguru13713@',
+          email: 'admin@valentine.com',
+          fullName: 'Admin',
+          joined: new Date().toISOString().split('T')[0],
+          status: 'active',
+          role: 'admin'
+        });
+        localStorage.setItem('users', JSON.stringify(users));
+      }
+    });
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const remember = document.querySelector('input[name="remember"]').checked;
+      
+      // Perform validation
+      if (email.trim() === '' || password.trim() === '') {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      // Get users from localStorage
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const user = users.find(u => (u.username === email || u.email === email) && u.password === password);
+
+      if (user) {
+        // Store current user
+        localStorage.setItem('currentUser', user.username);
+        
+        if (remember) {
+          localStorage.setItem('rememberedUser', user.username);
+        }
+
+        // Check if admin
+        if (user.role === 'admin' || user.username === 'admin') {
+          alert('Welcome Admin! 🔐');
+          window.location.href = 'admin.html';
+        } else {
+          alert('Login successful! Welcome to Valentine\'s Day 💕');
+          window.location.href = 'valentine.html';
+        }
+      } else {
+        alert('Invalid username/email or password');
+      }
+    });
+
+    // Optional: Add smooth focus effects
+    const inputs = document.querySelectorAll('input[type="text"], input[type="password"]');
+    inputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.parentElement.parentElement.classList.add('transform', 'scale-105');
+      });
+      input.addEventListener('blur', function() {
+        this.parentElement.parentElement.classList.remove('transform', 'scale-105');
+      });
+    });
+  </script>
+</body>
+</html>

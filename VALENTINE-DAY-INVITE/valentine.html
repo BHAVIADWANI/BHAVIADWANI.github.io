@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentines Day</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .gradient-background {
+      background: rgb(255, 208, 229);
+      background: linear-gradient(180deg, rgba(255, 208, 229, 1) 0%, rgba(255, 232, 242, 1) 36%, rgba(255, 255, 255, 1) 100%);
+    }
+
+    .bounce2 {
+      animation: bounce2 2s ease infinite;
+    }
+
+    @keyframes bounce2 {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .photo-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+      align-items: center;
+    }
+
+    .photo-card {
+      text-align: center;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(189, 30, 89, 0.2);
+    }
+
+    .photo-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      max-height: 300px;
+      object-fit: cover;
+    }
+
+    .heart-animation {
+      animation: heartPulse 1s ease-in-out infinite;
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+  </style>
+</head>
+<body class="gradient-background">
+  <div class="flex items-center justify-center h-screen">
+    <div class="flex flex-col items-center p-4">
+      <img id="imageDisplay" src="./images/image1.gif" alt="Cute kitten with flowers" class="rounded-md h-[300px]" style="object-fit: cover;" />
+      <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#bd1e59] my-4">Will you be my Valentine?</h2>
+      <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
+        <button id="yesButton"
+          class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium disabled:pointer-events-none disabled:opacity-50 hover:bg-green-400 min-h-12 min-w-[75px] px-4 py-2 bg-green-500 text-white transition">
+          Yes
+        </button>
+        <button id="noButton"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium transition disabled:pointer-events-none disabled:opacity-50 hover:bg-red-700 h-12 min-w-[75px] w-auto px-4 py-2 bg-red-500 text-white">
+          No
+        </button>
+      </div>
+
+      <!-- Photo Display Container -->
+      <div id="photoContainer" class="hidden mt-8 w-full max-w-2xl"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    const imageDisplay = document.getElementById('imageDisplay');
+    const valentineQuestion = document.getElementById('valentineQuestion');
+    const responseButtons = document.getElementById('responseButtons');
+    const photoContainer = document.getElementById('photoContainer');
+  
+    let noClickCount = 0;
+    let buttonHeight = 48;
+    let buttonWidth = 80;
+    let fontSize = 20;
+    const imagePaths = [
+      "./images/image1.gif",
+      "./images/image2.gif",
+      "./images/image3.gif",
+      "./images/image4.gif",
+      "./images/image5.gif",
+      "./images/image6.gif",
+      "./images/image7.gif"
+    ];
+
+    // Get current user from localStorage
+    function getCurrentUser() {
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const currentUsername = localStorage.getItem('currentUser');
+      return users.find(u => u.username === currentUsername);
+    }
+  
+    noButton.addEventListener('click', function() {
+      if (noClickCount < 5) {
+        noClickCount++;
+        imageDisplay.src = imagePaths[noClickCount];
+        buttonHeight += 35;
+        buttonWidth += 35;
+        fontSize += 25;
+        yesButton.style.height = `${buttonHeight}px`;
+        yesButton.style.width = `${buttonWidth}px`;
+        yesButton.style.fontSize = `${fontSize}px`;
+        if (noClickCount < 6) {
+          noButton.textContent = ["No", "Are you sure?", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry..."][noClickCount];
+        }
+      }
+    });
+  
+    // Full-screen single-photo overlay: merge photos into one image and display
+    yesButton.addEventListener('click', async () => {
+      const currentUser = getCurrentUser();
+      imageDisplay.src = './images/image7.gif';
+      valentineQuestion.textContent = "Yayyy!! 🎉❤️";
+      responseButtons.style.display = 'none';
+
+      // create combined image (if both photos exist) or use single available photo
+      let finalDataUrl = null;
+      try {
+        finalDataUrl = await createCombinedImage(currentUser);
+      } catch (err) {
+        console.error('Error creating combined image', err);
+      }
+
+      // show full-screen overlay with low-opacity gradient backdrop
+      showFullScreenPhoto(finalDataUrl || './images/image7.gif');
+      confetti();
+    });
+
+    // Helper: create combined image from available photos returning dataURL
+    function createCombinedImage(user) {
+      return new Promise((resolve) => {
+        if (!user) return resolve(null);
+
+        const imgA_src = user.photoHer || null; // prefer 'her' as left
+        const imgB_src = user.photoHim || null; // 'him' as right
+
+        // If only one exists, return it
+        if (imgA_src && !imgB_src) return resolve(imgA_src);
+        if (!imgA_src && imgB_src) return resolve(imgB_src);
+
+        // If none, resolve null
+        if (!imgA_src && !imgB_src) return resolve(null);
+
+        // Load both images
+        const imgA = new Image();
+        const imgB = new Image();
+        imgA.onload = checkDone;
+        imgB.onload = checkDone;
+        imgA.src = imgA_src;
+        imgB.src = imgB_src;
+
+        let loaded = 0;
+        function checkDone() {
+          loaded++;
+          if (loaded < 2) return;
+
+          // Canvas size: full HD-like but scale to images proportionally
+          const width = Math.max(imgA.width + imgB.width, 1200);
+          const height = Math.max(Math.max(imgA.height, imgB.height), 700);
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+
+          // subtle gradient background
+          const g = ctx.createLinearGradient(0, 0, 0, height);
+          g.addColorStop(0, 'rgba(255,208,229,0.12)');
+          g.addColorStop(1, 'rgba(255,232,242,0.12)');
+          ctx.fillStyle = g;
+          ctx.fillRect(0, 0, width, height);
+
+          // draw images side-by-side centered vertically
+          const halfW = Math.floor(width / 2);
+          // draw A on left, scaled to fit halfW x height
+          const aRatio = Math.min(halfW / imgA.width, height / imgA.height);
+          const aW = imgA.width * aRatio;
+          const aH = imgA.height * aRatio;
+          const aX = Math.floor((halfW - aW) / 2);
+          const aY = Math.floor((height - aH) / 2);
+          ctx.drawImage(imgA, aX, aY, aW, aH);
+
+          // draw B on right
+          const bRatio = Math.min(halfW / imgB.width, height / imgB.height);
+          const bW = imgB.width * bRatio;
+          const bH = imgB.height * bRatio;
+          const bX = halfW + Math.floor((halfW - bW) / 2);
+          const bY = Math.floor((height - bH) / 2);
+          ctx.drawImage(imgB, bX, bY, bW, bH);
+
+          // subtle overlay vignette
+          ctx.fillStyle = 'rgba(0,0,0,0.06)';
+          ctx.fillRect(0, 0, width, height);
+
+          resolve(canvas.toDataURL('image/jpeg', 0.92));
+        }
+      });
+    }
+
+    // Helper: show full-screen overlay with single image
+    function showFullScreenPhoto(dataUrl) {
+      // create overlay
+      const overlay = document.createElement('div');
+      overlay.id = 'fullScreenOverlay';
+      Object.assign(overlay.style, {
+        position: 'fixed', top: '0', left: '0', right: '0', bottom: '0',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: 'linear-gradient(180deg, rgba(189,30,89,0.16), rgba(233,30,99,0.08))',
+        zIndex: 9999, padding: '20px'
+      });
+
+      // image element
+      const img = document.createElement('img');
+      img.src = dataUrl;
+      Object.assign(img.style, {
+        maxWidth: '95%', maxHeight: '95%', borderRadius: '14px', boxShadow: '0 30px 80px rgba(0,0,0,0.4)',
+        objectFit: 'cover'
+      });
+
+      // close button
+      const close = document.createElement('button');
+      close.textContent = '✕';
+      Object.assign(close.style, {
+        position: 'absolute', top: '18px', right: '18px', zIndex: 10000,
+        background: 'rgba(255,255,255,0.9)', border: 'none', width: '44px', height: '44px', borderRadius: '50%', cursor: 'pointer', fontSize: '20px'
+      });
+      close.addEventListener('click', () => {
+        overlay.remove();
+        // return to main view
+        responseButtons.style.display = '';
+        photoContainer.innerHTML = '';
+        photoContainer.classList.add('hidden');
+      });
+
+      overlay.appendChild(img);
+      overlay.appendChild(close);
+      document.body.appendChild(overlay);
+
+      // make overlay close on click outside image
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) close.click();
+      });
+    }
+
+    // Check if user is logged in
+    window.addEventListener('load', function() {
+      const currentUser = localStorage.getItem('currentUser');
+      if (!currentUser) {
+        alert('Please login first');
+        window.location.href = 'login.html';
+      }
+    });
+  </script>  
+</body>
+</html>
