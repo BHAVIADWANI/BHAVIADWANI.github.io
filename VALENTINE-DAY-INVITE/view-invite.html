@@ -51,6 +51,25 @@
       }
     }
 
+    async function trackInviteView(sender, receiver) {
+      // Track that this invite was viewed
+      const tracking = JSON.parse(localStorage.getItem('inviteTracking')) || {};
+      const trackingKey = `${sender}_${receiver}`;
+      
+      if (!tracking[trackingKey]) {
+        tracking[trackingKey] = {
+          viewed: true,
+          viewedAt: new Date().toISOString(),
+          viewCount: 1
+        };
+      } else {
+        tracking[trackingKey].viewCount = (tracking[trackingKey].viewCount || 0) + 1;
+        tracking[trackingKey].viewedAt = new Date().toISOString();
+      }
+      
+      localStorage.setItem('inviteTracking', JSON.stringify(tracking));
+    }
+
     async function openInviteFor(sender, receiver, receiverPassword) {
       const content = document.getElementById('contentArea');
       const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -65,6 +84,9 @@
         content.innerHTML = '<p class="text-red-600">Incorrect receiver password.</p>';
         return;
       }
+
+      // Track the view
+      trackInviteView(sender, receiver);
 
       // Use combined photo if available
       const combined = creator.photoCombined || creator.photoHer || creator.photoHim || null;
@@ -82,7 +104,23 @@
         close.addEventListener('click', ()=> overlay.remove());
         overlay.appendChild(imgEl); overlay.appendChild(close); document.body.appendChild(overlay);
 
-        content.innerHTML = `<p class="text-gray-600">Invite from <strong>${creator.fullname || creator.username}</strong></p><p class="text-sm text-gray-500 mt-2">Click ✕ to close.</p>`;
+        content.innerHTML = `
+          <div class="text-center">
+            <p class="text-gray-600 mb-4">💕 Invite from <strong>${creator.fullname || creator.username}</strong></p>
+            <p class="text-sm text-gray-500 mb-6">Click ✕ to close.</p>
+            <div class="bg-pink-50 border-l-4 border-[#bd1e59] p-4 rounded text-left mb-6">
+              <p class="text-[#bd1e59] font-bold mb-3">What's Next?</p>
+              <ul class="text-sm text-gray-700 space-y-2">
+                <li>✓ You've received a special Valentine's invite!</li>
+                <li>📝 <a href="login.html" class="text-[#bd1e59] font-semibold hover:underline">Create your account</a> or <a href="login.html" class="text-[#bd1e59] font-semibold hover:underline">log in</a> to respond</li>
+                <li>💌 Share your own special message back</li>
+              </ul>
+            </div>
+            <a href="login.html" class="inline-block px-6 py-3 bg-[#bd1e59] text-white font-bold rounded-lg hover:bg-[#9b1649] transition">
+              Go to Login / Signup
+            </a>
+          </div>
+        `;
       } catch (err) {
         console.error(err); content.innerHTML = '<p class="text-red-600">Failed to load invite photo.</p>';
       }

@@ -656,11 +656,14 @@
         document.getElementById('confirmCombinedPhoto').style.display = 'block';
       }
 
-      // Invite link (use relative path)
+      // Invite link (use absolute path for GitHub Pages compatibility)
       const receiver = formData.receiverUsername || '';
       const sender = formData.username || '';
       if (sender && receiver) {
-        const link = `view-invite.html?sender=${encodeURIComponent(sender)}&receiver=${encodeURIComponent(receiver)}`;
+        const baseUrl = window.location.origin.includes('github.io') 
+          ? `${window.location.origin}/VALENTINE-DAY-INVITE/view-invite.html`
+          : `${window.location.origin}/view-invite.html`;
+        const link = `${baseUrl}?sender=${encodeURIComponent(sender)}&receiver=${encodeURIComponent(receiver)}`;
         const container = document.getElementById('inviteLinkContainer');
         const input = document.getElementById('inviteLinkInput');
         input.value = link;
@@ -708,7 +711,10 @@
 
       // generate invite link and attach to user
       if (newUser.username && newUser.receiverUsername) {
-        newUser.inviteLink = `view-invite.html?sender=${encodeURIComponent(newUser.username)}&receiver=${encodeURIComponent(newUser.receiverUsername)}`;
+        const baseUrl = window.location.origin.includes('github.io') 
+          ? `${window.location.origin}/VALENTINE-DAY-INVITE/view-invite.html`
+          : `${window.location.origin}/view-invite.html`;
+        newUser.inviteLink = `${baseUrl}?sender=${encodeURIComponent(newUser.username)}&receiver=${encodeURIComponent(newUser.receiverUsername)}`;
       }
 
       // Add new user to users array

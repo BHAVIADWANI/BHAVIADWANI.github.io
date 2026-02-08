@@ -63,7 +63,19 @@
   </style>
 </head>
 <body class="gradient-background">
-  <div class="flex items-center justify-center h-screen">
+  <!-- Header Navigation -->
+  <div class="fixed top-0 left-0 right-0 bg-white bg-opacity-90 shadow-md p-4 z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold text-[#bd1e59]">💌 Valentine's Day</h1>
+      <div class="flex gap-4 items-center">
+        <span id="currentUserDisplay" class="text-sm text-gray-600"></span>
+        <a href="sender-control.html" class="text-[#bd1e59] font-semibold hover:underline text-sm">📊 Invite Status</a>
+        <a href="login.html" onclick="logout(event)" class="text-[#bd1e59] font-semibold hover:underline text-sm">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-center h-screen pt-16">
     <div class="flex flex-col items-center p-4">
       <img id="imageDisplay" src="./images/image1.gif" alt="Cute kitten with flowers" class="rounded-md h-[300px]" style="object-fit: cover;" />
       <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#bd1e59] my-4">Will you be my Valentine?</h2>
@@ -264,14 +276,24 @@
       });
     }
 
-    // Check if user is logged in
+    // Display current user and check login
     window.addEventListener('load', function() {
       const currentUser = localStorage.getItem('currentUser');
       if (!currentUser) {
         alert('Please login first');
         window.location.href = 'login.html';
+      } else {
+        document.getElementById('currentUserDisplay').textContent = `Welcome, ${currentUser}!`;
       }
     });
-  </script>  
+
+    // Logout function
+    function logout(e) {
+      e.preventDefault();
+      localStorage.removeItem('currentUser');
+      sessionStorage.removeItem('currentUser');
+      window.location.href = 'login.html';
+    }
+  </script>
 </body>
 </html>

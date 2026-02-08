@@ -37,8 +37,9 @@ loginForm.addEventListener('submit', function(e) {
   const user = users.find(u => (u.username === email || u.email === email) && u.password === password);
 
   if (user) {
-    // Store current user
+    // Store current user in both localStorage and sessionStorage
     localStorage.setItem('currentUser', user.username);
+    sessionStorage.setItem('currentUser', JSON.stringify(user));
     
     if (remember) {
       localStorage.setItem('rememberedUser', user.username);
@@ -50,7 +51,17 @@ loginForm.addEventListener('submit', function(e) {
       window.location.href = 'admin.html';
     } else {
       alert('Login successful! Welcome to Valentine\'s Day 💕');
-      window.location.href = 'valentine.html';
+      // Check if user has sent any invites
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const hasSentInvites = users.some(u => u.username === user.username && u.receiverUsername);
+      
+      if (hasSentInvites) {
+        // Show option to check invite status or go to valentine page
+        const goToControl = confirm('You have sent invites! Would you like to check their status?');
+        window.location.href = goToControl ? 'sender-control.html' : 'valentine.html';
+      } else {
+        window.location.href = 'valentine.html';
+      }
     }
   } else {
     alert('Invalid username/email or password');
