@@ -351,29 +351,22 @@
           </div>
         </div>
 
-        <!-- Step 4: Recovery Photos -->
+        <!-- Step 4: Recovery Photo -->
         <div id="step4" class="step-container">
-          <h2 class="step-title">Recovery Photos</h2>
-          <p class="step-subtitle">Upload photos for account recovery</p>
+          <h2 class="step-title">Recovery Photo</h2>
+          <p class="step-subtitle">Upload a photo for account recovery</p>
 
           <div class="question-card">
-            <p class="text-sm text-gray-600 mb-3">💡 These photos will help you recover your account. We'll show them during password reset.</p>
+            <p class="text-sm text-gray-600 mb-3">💡 This photo will help you recover your account. We'll show it during password reset.</p>
           </div>
 
           <div>
-            <label for="recoveryPhotoHim">📷 Recovery Photo - Him</label>
-              <div class="photo-upload-container" onclick="document.getElementById('recoveryPhotoHim').click()">
-                <p id="recoveryPhotoHimText">Click to upload recovery photo (him)</p>
-                <input type="file" id="recoveryPhotoHim" accept="image/*" onchange="handlePhotoPreview(this, 'recoveryPhotoHimPreview')" />
-              </div>
-              <img id="recoveryPhotoHimPreview" class="photo-preview" style="display:none;" />
-
-            <label for="recoveryPhotoHer" class="mt-6 block">📷 Recovery Photo - Her</label>
-            <div class="photo-upload-container" onclick="document.getElementById('recoveryPhotoHer').click()">
-              <p id="recoveryPhotoHerText">Click to upload recovery photo (her)</p>
-              <input type="file" id="recoveryPhotoHer" accept="image/*" onchange="handlePhotoPreview(this, 'recoveryPhotoHerPreview')" />
+            <label for="recoveryPhoto">📷 Recovery Photo</label>
+            <div class="photo-upload-container" onclick="document.getElementById('recoveryPhoto').click()">
+              <p id="recoveryPhotoText">Click to upload recovery photo</p>
+              <input type="file" id="recoveryPhoto" accept="image/*" onchange="handlePhotoPreview(this, 'recoveryPhotoPreview')" />
             </div>
-            <img id="recoveryPhotoHerPreview" class="photo-preview" style="display:none;" />
+            <img id="recoveryPhotoPreview" class="photo-preview" style="display:none;" />
           </div>
 
           <div class="button-group">
@@ -577,11 +570,10 @@
       }
 
       if (step === 4) {
-        const recoveryPhotoHimFile = document.getElementById('recoveryPhotoHim').files[0];
-        const recoveryPhotoHerFile = document.getElementById('recoveryPhotoHer').files[0];
+        const recoveryPhotoFile = document.getElementById('recoveryPhoto').files[0];
 
-        if (!recoveryPhotoHimFile || !recoveryPhotoHerFile) {
-          alert('Please upload both recovery photos');
+        if (!recoveryPhotoFile) {
+          alert('Please upload a recovery photo');
           return false;
         }
 
