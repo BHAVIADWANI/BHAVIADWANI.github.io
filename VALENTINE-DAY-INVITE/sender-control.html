@@ -111,7 +111,7 @@
           <h1 class="text-4xl font-bold text-[#bd1e59] mb-2">Invite Status 💌</h1>
           <p class="text-gray-600">See who has viewed your Valentine's invitation</p>
         </div>
-        <a href="admin.html" class="text-[#bd1e59] font-semibold hover:underline">← Back to Admin</a>
+        <a href="valentine.html" class="text-[#bd1e59] font-semibold hover:underline">← Back to Home</a>
       </div>
 
       <!-- Main Card -->
@@ -142,10 +142,21 @@
     let currentUser = null;
 
     function getCurrentUser() {
-      // Get from session or localStorage
+      // Get from session first (more secure), then fallback to localStorage
       const sessionUser = sessionStorage.getItem('currentUser');
       if (sessionUser) {
-        return JSON.parse(sessionUser);
+        try {
+          return JSON.parse(sessionUser);
+        } catch (e) {
+          console.error('Invalid session data');
+        }
+      }
+      
+      const storedUser = localStorage.getItem('currentUser');
+      if (storedUser) {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(u => u.username === storedUser);
+        return user;
       }
       return null;
     }
@@ -220,9 +231,19 @@
     }
 
     function logout() {
+      localStorage.removeItem('currentUser');
       sessionStorage.removeItem('currentUser');
       window.location.href = 'login.html';
     }
+
+    // Check login on page load
+    window.addEventListener('load', function() {
+      const user = getCurrentUser();
+      if (!user) {
+        alert('Please log in to access this page');
+        window.location.href = 'login.html';
+      }
+    });
 
     // Display invites on load
     displayInvites();

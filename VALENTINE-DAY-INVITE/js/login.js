@@ -22,12 +22,12 @@ window.addEventListener('load', function() {
 loginForm.addEventListener('submit', function(e) {
   e.preventDefault();
   
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
   const remember = document.querySelector('input[name="remember"]').checked;
   
   // Perform validation
-  if (email.trim() === '' || password.trim() === '') {
+  if (email === '' || password === '') {
     alert('Please fill in all fields');
     return;
   }
@@ -64,7 +64,8 @@ loginForm.addEventListener('submit', function(e) {
       }
     }
   } else {
-    alert('Invalid username/email or password');
+    alert('Invalid username/email or password. Please check your credentials and try again.');
+    document.getElementById('password').value = '';
   }
 });
 
