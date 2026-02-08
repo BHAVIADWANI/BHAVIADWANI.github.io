@@ -672,8 +672,7 @@
 
       // Convert photos to Base64 (single combined photo used as primary)
       const photoCombined = await getBase64FromFile('combinedPhoto');
-      const recoveryPhotoHim = await getBase64FromFile('recoveryPhotoHim');
-      const recoveryPhotoHer = await getBase64FromFile('recoveryPhotoHer');
+      const recoveryPhoto = await getBase64FromFile('recoveryPhoto');
 
       // Get existing users
       let users = JSON.parse(localStorage.getItem('users')) || [];
@@ -694,8 +693,7 @@
           photoCombined: photoCombined,
           photoHer: photoCombined,
           photoHim: null,
-        recoveryPhotoHim: recoveryPhotoHim,
-        recoveryPhotoHer: recoveryPhotoHer,
+        recoveryPhoto: recoveryPhoto,
         joined: new Date().toISOString().split('T')[0],
         status: 'active',
         role: 'user'
