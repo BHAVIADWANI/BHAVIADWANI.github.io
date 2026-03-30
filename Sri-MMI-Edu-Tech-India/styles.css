@@ -83,11 +83,22 @@ body {
     flex-wrap: wrap;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
 .logo h1 {
     font-size: clamp(1.1rem, 4vw, 1.5rem);
     font-weight: 700;
     margin-bottom: 0.2rem;
     letter-spacing: 0.5px;
+}
+
+.logo-img {
+    width: 45px;
+    height: auto;
 }
 
 .logo .tagline {
@@ -890,6 +901,18 @@ section {
 
     .mobile-menu-toggle {
         display: block;
+    }
+
+    .nav-wrapper {
+        justify-content: space-between;
+    }
+
+    .logo h1 {
+        font-size: 1rem;
+    }
+
+    .logo .tagline {
+        font-size: 0.75rem;
     }
 
     .about-content {
