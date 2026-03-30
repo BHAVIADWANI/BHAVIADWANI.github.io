@@ -2,7 +2,7 @@
 // Admin Credentials (Default)
 // ========================================
 const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD = 'srimmi2025';
+const ADMIN_PASSWORD = 'srimmi2026';
 
 // ========================================
 // DOM Elements
