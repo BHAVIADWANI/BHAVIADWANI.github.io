@@ -1,0 +1,16 @@
+project_id = "vkgbhtcxohecjldncuam"
+
+[functions.ai-tutor]
+verify_jwt = false
+
+[functions.generate-organism-image]
+verify_jwt = false
+
+[functions.analyze-lab-image]
+verify_jwt = false
+
+[functions.verify-razorpay-payment]
+verify_jwt = false
+
+[functions.admin-list-users]
+verify_jwt = false
