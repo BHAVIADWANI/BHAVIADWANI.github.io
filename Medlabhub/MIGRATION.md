@@ -1,6 +1,6 @@
 # Migration Guide: Removing Partner Dependencies
 
-This guide documents the changes made to remove Lovable and other partner website dependencies from the MicroID project.
+This guide documents the changes made to remove Lovable and other partner website dependencies from the Medlabhub project.
 
 ## Changes Made
 
@@ -16,7 +16,7 @@ This guide documents the changes made to remove Lovable and other partner websit
 - **Reason**: Not needed for standalone development
 
 #### index.html
-- **Changed**: Author from "Lovable" to "MicroID Team"
+- **Changed**: Author from "Lovable" to "Medlabhub Team"
 - **Removed**: Twitter:site reference to @Lovable
 - **Reason**: Update metadata to reflect actual project ownership
 
@@ -175,5 +175,5 @@ For questions about specific migrations:
 ---
 
 **Migration Date**: April 2026
-**Project**: MicroID
+**Project**: Medlabhub
 **Status**: In Progress

@@ -1,6 +1,6 @@
-# Documentation Index - MicroID Project
+# Documentation Index - Medlabhub Project
 
-## Welcome to MicroID Development
+## Welcome to Medlabhub Development
 
 This index helps you navigate all project documentation. Start here!
 
@@ -17,7 +17,7 @@ This index helps you navigate all project documentation. Start here!
 
 ### Project Documentation
 - **[README.md](README.md)** - Project overview
-  - What is MicroID?
+  - What is Medlabhub?
   - Key features
   - Technology stack
   - Project structure
@@ -286,7 +286,7 @@ Everything you need is documented here.
 
 ---
 
-**Project**: MicroID — Microbiology Identification  
+**Project**: Medlabhub — Microbiology Identification  
 **Version**: 1.0  
 **Status**: Production Ready  
 **Last Updated**: April 1, 2026

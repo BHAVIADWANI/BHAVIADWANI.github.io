@@ -24,8 +24,8 @@ export default defineConfig(({ mode }) => ({
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       },
       manifest: {
-        name: "MicroID — Microbiology Identification",
-        short_name: "MicroID",
+        name: "Medlabhub — Microbiology Identification",
+        short_name: "Medlabhub",
         description: "AI-powered microbiology identification and analysis for students, researchers, and lab professionals.",
         theme_color: "#0f172a",
         background_color: "#0f172a",

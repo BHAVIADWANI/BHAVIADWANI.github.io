@@ -1,4 +1,4 @@
-# Quick Reference Guide - MicroID
+# Quick Reference Guide - Medlabhub
 
 ## 🚀 Quick Start (2 minutes)
 

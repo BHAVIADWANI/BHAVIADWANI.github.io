@@ -1,4 +1,4 @@
-# MicroID Project Configuration
+# Medlabhub Project Configuration
 
 ## Build & Development
 - Build Tool: **Vite 5.4.19**
@@ -136,4 +136,4 @@ VITE_API_BASE_URL
 ---
 
 **Last Updated**: April 2026
-**Maintained By**: MicroID Development Team
+**Maintained By**: Medlabhub Development Team

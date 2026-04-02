@@ -1,4 +1,4 @@
-# MicroID — Microbiology Identification
+# Medlabhub — Microbiology Identification
 
 An AI-powered microbiology identification and analysis platform designed for students, researchers, and laboratory professionals.
 
