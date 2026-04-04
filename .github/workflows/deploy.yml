@@ -1,8 +1,12 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (Deprecated - Use GitHub Pages build instead)
+
+# This workflow is deprecated. GitHub Pages automatically builds and deploys from the /docs folder.
+# Keeping for reference only - disabled by commenting out the trigger.
 
 on:
-  push:
-    branches: [ main ]
+  # Disabled - using GitHub Pages default deployment instead
+  # push:
+  #   branches: [ main ]
   workflow_dispatch:
 
 jobs:
